@@ -1,0 +1,210 @@
+/* Contenedor del calendario */
+.calendar-container {
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  padding: var(--spacing-md);
+}
+
+/* Encabezado del calendario */
+.calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--spacing-md);
+}
+
+.current-month {
+  font-size: 1.1rem;
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+.btn-month {
+  background: none;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+  color: var(--text-color);
+}
+
+.btn-month:hover:not(:disabled) {
+  background: var(--secondary-color);
+  border-color: var(--primary-color);
+}
+
+.btn-month:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Días de la semana */
+.calendar-days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--spacing-xs);
+  margin-bottom: var(--spacing-sm);
+  color: #666;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* Grid de fechas */
+.calendar-dates {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--spacing-xs);
+}
+
+/* Días individuales */
+.calendar-date {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all var(--transition-speed) ease;
+  position: relative;
+  border: 1px solid transparent;
+}
+
+/* Estados de los días */
+.calendar-date.disabled {
+  color: #ccc;
+  cursor: not-allowed;
+}
+
+.calendar-date.other-month {
+  color: #999;
+}
+
+.calendar-date.available {
+  background-color: #f0fdf4;
+  border-color: #86efac;
+  cursor: pointer;
+}
+
+.calendar-date.available:hover {
+  background-color: #dcfce7;
+  border-color: #22c55e;
+}
+
+.calendar-date.selected {
+  background-color: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.calendar-date.has-spots::after {
+  content: "";
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--success-color);
+}
+
+.calendar-date.few-spots::after {
+  background-color: #f59e0b;
+}
+
+.calendar-date.today {
+  border: 2px solid var(--primary-color);
+  font-weight: 500;
+}
+
+/* Tooltip para fechas */
+.calendar-date[data-tooltip] {
+  position: relative;
+}
+
+.calendar-date[data-tooltip]:hover::before {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius);
+  font-size: 0.8rem;
+  white-space: nowrap;
+  z-index: 1000;
+  margin-bottom: var(--spacing-xs);
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .calendar-container {
+    padding: var(--spacing-sm);
+  }
+
+  .calendar-days,
+  .calendar-dates {
+    gap: 2px;
+  }
+
+  .calendar-date {
+    font-size: 0.8rem;
+  }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.calendar-container {
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Soporte para modo oscuro */
+@media (prefers-color-scheme: dark) {
+  .calendar-container {
+    background: #1a1a1a;
+  }
+
+  .calendar-date.available {
+    background-color: #132e1a;
+    border-color: #1a4731;
+  }
+
+  .calendar-date.available:hover {
+    background-color: #1c4532;
+    border-color: #2f855a;
+  }
+
+  .calendar-date.other-month {
+    color: #666;
+  }
+
+  .calendar-date.disabled {
+    color: #444;
+  }
+
+  .calendar-days {
+    color: #999;
+  }
+}
+
+/* Soporte para movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  .calendar-container {
+    animation: none;
+  }
+}

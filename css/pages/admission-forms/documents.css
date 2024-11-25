@@ -1,0 +1,210 @@
+/* Estilos para la sección de documentos */
+.documents-list {
+  margin-bottom: var(--spacing-lg);
+  background-color: var(--secondary-color);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius);
+}
+
+.documents-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-color);
+}
+
+/* Estilos para cada documento */
+.document-item {
+  display: flex;
+  align-items: flex-start;
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  background: white;
+  transition: all var(--transition-speed) ease;
+}
+
+.document-item.dragover {
+  border-color: var(--primary-color);
+  background-color: var(--secondary-color);
+}
+
+.document-icon {
+  font-size: 1.5rem;
+  margin-right: var(--spacing-md);
+  color: var(--text-color);
+  line-height: 1;
+}
+
+.document-info {
+  flex-grow: 1;
+  margin-right: var(--spacing-md);
+}
+
+.document-name {
+  font-weight: 500;
+  margin-bottom: var(--spacing-xs);
+  color: var(--text-color);
+}
+
+.document-status {
+  font-size: 0.875rem;
+  color: #666;
+  margin-bottom: var(--spacing-xs);
+}
+
+.document-details {
+  font-size: 0.875rem;
+  color: #666;
+  margin-bottom: var(--spacing-xs);
+}
+
+.document-formats {
+  color: #666;
+  margin-bottom: var(--spacing-xs);
+}
+
+/* Estados de verificación */
+.verification-status {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius);
+  display: inline-block;
+  font-size: 0.75rem;
+}
+
+.verification-status.pending {
+  background-color: #fff3e0;
+  color: #e65100;
+}
+
+.verification-status.verified {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.verification-status.rejected {
+  background-color: #ffebee;
+  color: #c62828;
+}
+
+/* Barra de progreso de carga */
+.upload-progress {
+  height: 4px;
+  background-color: var(--border-color);
+  border-radius: 2px;
+  margin: var(--spacing-xs) 0;
+  overflow: hidden;
+  display: none;
+}
+
+.upload-progress .progress-bar {
+  height: 100%;
+  background-color: var(--success-color);
+  width: 0;
+  transition: width var(--transition-speed) ease;
+}
+
+/* Vista previa de documentos */
+.document-preview {
+  margin-top: var(--spacing-md);
+  max-width: 200px;
+  max-height: 200px;
+  overflow: hidden;
+  display: none;
+  border-radius: var(--border-radius);
+}
+
+.document-preview img {
+  width: 100%;
+  height: auto;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+}
+
+.document-preview .pdf-preview {
+  padding: var(--spacing-md);
+  background-color: var(--secondary-color);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  text-align: center;
+}
+
+/* Mensajes de error */
+.upload-error {
+  color: var(--error-color);
+  font-size: 0.875rem;
+  margin-top: var(--spacing-xs);
+  display: none;
+}
+
+/* Zona de arrastre global */
+.dropzone {
+  border: 2px dashed var(--border-color);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-lg);
+  text-align: center;
+  background-color: var(--secondary-color);
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+  margin-bottom: var(--spacing-lg);
+}
+
+.dropzone:hover,
+.dropzone.dragover {
+  border-color: var(--primary-color);
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+.dropzone-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.upload-icon {
+  font-size: 2rem;
+  color: #666;
+}
+
+.dropzone-text {
+  color: #666;
+  line-height: 1.5;
+}
+
+/* Botón de carga */
+.btn-upload {
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border: 1px solid var(--border-color);
+  background: white;
+  border-radius: var(--border-radius);
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+  white-space: nowrap;
+}
+
+.btn-upload:hover {
+  background: var(--secondary-color);
+  border-color: var(--primary-color);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .document-item {
+    flex-direction: column;
+  }
+
+  .document-info {
+    margin-right: 0;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .btn-upload {
+    width: 100%;
+  }
+
+  .document-preview {
+    max-width: 100%;
+  }
+}

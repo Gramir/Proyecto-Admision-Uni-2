@@ -1,0 +1,101 @@
+/* Progress Bar Component */
+.progress-container {
+  width: 100%;
+  padding: var(--spacing-lg);
+  background: white;
+  border-radius: var(--border-radius);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar-container {
+  margin-bottom: var(--spacing-md);
+}
+
+.progress-bar {
+  height: 8px;
+  background: #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: var(--success-color);
+  border-radius: 4px;
+  transition: width var(--transition-speed) ease;
+  width: 28.52%; /* Para el segundo paso */
+}
+
+.progress-steps {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0 var(--spacing-sm);
+}
+
+.step {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.step-number {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: white;
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  margin-bottom: var(--spacing-xs);
+  transition: all var(--transition-speed) ease;
+}
+
+.step.active .step-number {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+.step.completed .step-number {
+  background: var(--success-color);
+  color: white;
+  border-color: var(--success-color);
+}
+
+.step-label {
+  font-size: 0.9rem;
+  color: var(--text-color);
+  text-align: center;
+}
+
+.step.active .step-label {
+  font-weight: 500;
+}
+
+/* Media queries para responsividad */
+@media (max-width: 768px) {
+  .step-label {
+    font-size: 0.8rem;
+  }
+
+  .step-number {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+@media (max-width: 576px) {
+  .step-label {
+    display: none;
+  }
+
+  .step-number {
+    width: 24px;
+    height: 24px;
+  }
+}

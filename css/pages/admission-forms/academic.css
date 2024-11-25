@@ -1,0 +1,233 @@
+/* Estructura principal */
+.academic-grid {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: var(--spacing-lg);
+}
+
+/* Sección de selección */
+.selection-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+/* Sección de programas */
+.programs-section {
+  grid-column: 1 / -1;
+}
+
+.section-title {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  margin-bottom: var(--spacing-md);
+}
+
+.programs-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-md);
+}
+
+/* Tarjetas de programa */
+.program-card {
+  border: 1px solid var(--border-color);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  position: relative;
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: white;
+}
+
+.program-card:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.program-card.selected {
+  border-color: var(--success-color);
+  background-color: #f0fdf4;
+}
+
+.program-radio {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  accent-color: var(--success-color);
+}
+
+.program-title {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: var(--spacing-sm);
+  padding-right: var(--spacing-xl);
+}
+
+.program-details {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.program-details li {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: var(--spacing-xs);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.program-details li::before {
+  content: "•";
+  color: var(--primary-color);
+}
+
+.btn-details {
+  margin-top: var(--spacing-md);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border: 1px solid var(--border-color);
+  background: transparent;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  transition: all var(--transition-speed) ease;
+  align-self: flex-start;
+}
+
+.btn-details:hover {
+  border-color: var(--primary-color);
+  background: var(--primary-color);
+  color: white;
+}
+
+/* Sección de historial */
+.history-section {
+  grid-column: 1 / -1;
+  background: white;
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Búsqueda de instituciones */
+.search-group {
+  position: relative;
+}
+
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid var(--border-color);
+  border-top: none;
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
+  max-height: 200px;
+  overflow-y: auto;
+  z-index: 1000;
+  display: none;
+}
+
+.search-results.active {
+  display: block;
+}
+
+.search-item {
+  padding: var(--spacing-sm);
+  cursor: pointer;
+  transition: background-color var(--transition-speed) ease;
+}
+
+.search-item:hover {
+  background-color: var(--secondary-color);
+}
+
+/* Opción de "No lo encontré" */
+.not-found-option {
+  margin-top: var(--spacing-xs);
+}
+
+.not-found-option label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: 0.9rem;
+  color: #666;
+  cursor: pointer;
+}
+
+/* Modal de detalles del programa */
+.program-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-speed) ease;
+}
+
+.program-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background: white;
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius);
+  max-width: 600px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  transform: translateY(-20px);
+  transition: transform var(--transition-speed) ease;
+}
+
+.program-modal.active .modal-content {
+  transform: translateY(0);
+}
+
+.modal-close {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .academic-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .programs-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .history-section {
+    padding: var(--spacing-md);
+  }
+
+  .program-card {
+    padding: var(--spacing-sm);
+  }
+}

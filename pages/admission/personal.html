@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario de Admisión - Información Personal</title>
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/components/progress-bar.css" />
+    <link rel="stylesheet" href="/css/components/forms.css" />
+    <link
+      rel="stylesheet"
+      href="../../css/pages/admission-forms/personal.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Barra de Progreso -->
+      <div class="progress-container">
+        <div class="progress-bar-container">
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 14.28%"></div>
+          </div>
+        </div>
+        <div class="progress-steps">
+          <div class="step active">
+            <div class="step-number">1</div>
+            <span class="step-label">Personal</span>
+          </div>
+          <div class="step">
+            <div class="step-number">2</div>
+            <span class="step-label">Documentos</span>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <span class="step-label">Generales</span>
+          </div>
+          <div class="step">
+            <div class="step-number">4</div>
+            <span class="step-label">Académica</span>
+          </div>
+          <div class="step">
+            <div class="step-number">5</div>
+            <span class="step-label">Accesibilidad</span>
+          </div>
+          <div class="step">
+            <div class="step-number">6</div>
+            <span class="step-label">Prueba</span>
+          </div>
+          <div class="step">
+            <div class="step-number">7</div>
+            <span class="step-label">Pago</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulario Principal -->
+      <form id="personalForm" class="form-section">
+        <h2 class="form-title">Información Personal</h2>
+
+        <div class="form-grid">
+          <!-- Tipo de Admisión -->
+          <div class="form-group">
+            <label for="tipoAdmision" class="required">Tipo Admisión</label>
+            <select
+              id="tipoAdmision"
+              name="tipoAdmision"
+              class="form-control"
+              required
+            >
+              <option value="">Seleccione una opción</option>
+              <option value="nuevo">Nuevo Ingreso</option>
+              <option value="transferencia">Transferencia</option>
+            </select>
+          </div>
+
+          <!-- Nombres -->
+          <div class="form-group">
+            <label for="nombres" class="required">Nombres</label>
+            <div class="char-count">0/150</div>
+            <input
+              type="text"
+              id="nombres"
+              name="nombres"
+              class="form-control"
+              maxlength="150"
+              required
+            />
+          </div>
+
+          <!-- Apellidos -->
+          <div class="form-group">
+            <label for="apellidos" class="required">Apellidos</label>
+            <div class="char-count">0/150</div>
+            <input
+              type="text"
+              id="apellidos"
+              name="apellidos"
+              class="form-control"
+              maxlength="150"
+              required
+            />
+          </div>
+
+          <!-- Sexo -->
+          <div class="form-group">
+            <label for="sexo" class="required">Sexo</label>
+            <select id="sexo" name="sexo" class="form-control" required>
+              <option value="">Seleccione una opción</option>
+              <option value="M">Masculino</option>
+              <option value="F">Femenino</option>
+            </select>
+          </div>
+
+          <!-- Fecha Nacimiento -->
+          <div class="form-group">
+            <label for="fechaNacimiento" class="required"
+              >Fecha Nacimiento</label
+            >
+            <input
+              type="date"
+              id="fechaNacimiento"
+              name="fechaNacimiento"
+              class="form-control"
+              required
+            />
+          </div>
+
+          <!-- Estado Civil -->
+          <div class="form-group">
+            <label for="estadoCivil" class="required">Estado Civil</label>
+            <select
+              id="estadoCivil"
+              name="estadoCivil"
+              class="form-control"
+              required
+            >
+              <option value="">Seleccione una opción</option>
+              <option value="soltero">Soltero/a</option>
+              <option value="casado">Casado/a</option>
+              <option value="divorciado">Divorciado/a</option>
+              <option value="viudo">Viudo/a</option>
+            </select>
+          </div>
+
+          <!-- Cédula -->
+          <div class="form-group">
+            <label for="cedula" class="required">Cédula Identidad</label>
+            <div class="char-count">0/20</div>
+            <input
+              type="text"
+              id="cedula"
+              name="cedula"
+              class="form-control"
+              maxlength="20"
+              pattern="[0-9]{3}-[0-9]{7}-[0-9]{1}"
+              placeholder="000-0000000-0"
+              required
+            />
+            <div class="help-text">Formato: 000-0000000-0</div>
+          </div>
+
+          <!-- Pasaporte -->
+          <div class="form-group">
+            <label for="pasaporte">Pasaporte</label>
+            <div class="char-count">0/20</div>
+            <input
+              type="text"
+              id="pasaporte"
+              name="pasaporte"
+              class="form-control"
+              maxlength="20"
+            />
+          </div>
+
+          <!-- Enfermedad -->
+          <div class="form-group">
+            <label for="enfermedad">Enfermedad que padece</label>
+            <div class="char-count">0/100</div>
+            <input
+              type="text"
+              id="enfermedad"
+              name="enfermedad"
+              class="form-control"
+              maxlength="100"
+            />
+          </div>
+
+          <!-- Alergias -->
+          <div class="form-group">
+            <label for="alergias">Alergias que padece</label>
+            <div class="char-count">0/200</div>
+            <textarea
+              id="alergias"
+              name="alergias"
+              class="form-control"
+              maxlength="200"
+              rows="3"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Sección de Contactos de Emergencia -->
+        <div class="contacts-section">
+          <h3 class="contacts-title">Contactos de Emergencia</h3>
+          <div id="contacts-container" class="contacts-container">
+            <!-- Los contactos se generarán dinámicamente -->
+          </div>
+        </div>
+
+        <!-- Navegación -->
+        <div class="navigation">
+          <button type="button" class="btn btn-prev" disabled>Anterior</button>
+          <button type="button" class="btn btn-next">Siguiente</button>
+        </div>
+      </form>
+    </div>
+
+    <script src="../../js/utils/form-handlers.js"></script>
+    <script src="../../js/pages/admission-forms/personal.js"></script>
+  </body>
+</html>

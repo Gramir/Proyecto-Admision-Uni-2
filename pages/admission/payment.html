@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario de Admisión - Portal de Pagos</title>
+    <link rel="stylesheet" href="../../css/main.css" />
+    <link rel="stylesheet" href="../../css/components/progress-bar.css" />
+    <link rel="stylesheet" href="../../css/components/forms.css" />
+    <link rel="stylesheet" href="../../css/pages/admission-forms/payment.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Barra de Progreso -->
+      <div class="progress-container">
+        <div class="progress-bar-container">
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 100%"></div>
+          </div>
+        </div>
+        <div class="progress-steps">
+          <div class="step completed">
+            <div class="step-number">✓</div>
+            <span class="step-label">Personal</span>
+          </div>
+          <div class="step completed">
+            <div class="step-number">✓</div>
+            <span class="step-label">Documentos</span>
+          </div>
+          <div class="step completed">
+            <div class="step-number">✓</div>
+            <span class="step-label">Generales</span>
+          </div>
+          <div class="step completed">
+            <div class="step-number">✓</div>
+            <span class="step-label">Académica</span>
+          </div>
+          <div class="step completed">
+            <div class="step-number">✓</div>
+            <span class="step-label">Accesibilidad</span>
+          </div>
+          <div class="step completed">
+            <div class="step-number">✓</div>
+            <span class="step-label">Prueba</span>
+          </div>
+          <div class="step active">
+            <div class="step-number">7</div>
+            <span class="step-label">Pago</span>
+          </div>
+        </div>
+      </div>
+
+      <form id="paymentForm" class="form-section">
+        <h2 class="form-title">PORTAL DE PAGOS</h2>
+
+        <!-- Resumen de Costos -->
+        <div class="cost-summary">
+          <h3 class="section-title">Resumen de Costos</h3>
+          <div class="cost-grid">
+            <div class="cost-item">
+              <span>Derecho de Admisión</span>
+              <span class="cost-value" id="admissionCost">$XXX.XX</span>
+            </div>
+            <div class="cost-item">
+              <span>Prueba de Admisión</span>
+              <span class="cost-value" id="examCost">$XXX.XX</span>
+            </div>
+            <div class="cost-item processing-fee">
+              <span>Cargo por Procesamiento</span>
+              <span class="cost-value" id="processingFee">$XX.XX</span>
+            </div>
+            <div class="cost-item total">
+              <span>Total a Pagar</span>
+              <span class="cost-value" id="totalCost">$XXX.XX</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Opciones de Pago -->
+        <div class="payment-options">
+          <h3 class="section-title">Seleccione Método de Pago</h3>
+          <div class="payment-methods">
+            <label class="payment-method">
+              <input type="radio" name="paymentMethod" value="card" checked />
+              <span class="method-icon">💳</span>
+              <div class="method-details">
+                <span class="method-name">Tarjeta de Crédito/Débito</span>
+                <span class="method-description">Pago seguro con tarjeta</span>
+              </div>
+            </label>
+
+            <label class="payment-method">
+              <input type="radio" name="paymentMethod" value="transfer" />
+              <span class="method-icon">🏦</span>
+              <div class="method-details">
+                <span class="method-name">Transferencia Bancaria</span>
+                <span class="method-description"
+                  >Pago mediante transferencia</span
+                >
+              </div>
+            </label>
+
+            <label class="payment-method">
+              <input type="radio" name="paymentMethod" value="qr" />
+              <span class="method-icon">📱</span>
+              <div class="method-details">
+                <span class="method-name">Pago con QR</span>
+                <span class="method-description"
+                  >Escanea y paga desde tu app</span
+                >
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- Formulario de Tarjeta -->
+        <div id="cardForm" class="payment-form">
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label for="cardName" class="required"
+                >Nombre en la Tarjeta</label
+              >
+              <input
+                type="text"
+                id="cardName"
+                name="cardName"
+                class="form-control"
+                required
+                autocomplete="cc-name"
+              />
+            </div>
+
+            <div class="form-group full-width">
+              <label for="cardNumber" class="required">Número de Tarjeta</label>
+              <input
+                type="text"
+                id="cardNumber"
+                name="cardNumber"
+                class="form-control"
+                required
+                autocomplete="cc-number"
+                pattern="\d{4} \d{4} \d{4} \d{4}"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="cardExpiry" class="required">Fecha Expiración</label>
+              <input
+                type="text"
+                id="cardExpiry"
+                name="cardExpiry"
+                class="form-control"
+                required
+                autocomplete="cc-exp"
+                placeholder="MM/AA"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="cardCvc" class="required">Código de Seguridad</label>
+              <input
+                type="text"
+                id="cardCvc"
+                name="cardCvc"
+                class="form-control"
+                required
+                autocomplete="cc-csc"
+                maxlength="4"
+              />
+              <div class="help-text">
+                3 o 4 dígitos en el reverso de la tarjeta
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Formulario de Transferencia (inicialmente oculto) -->
+        <div id="transferForm" class="payment-form hidden">
+          <div class="bank-info">
+            <h4>Información Bancaria</h4>
+            <div class="bank-details">
+              <div class="detail-item">
+                <span class="detail-label">Banco:</span>
+                <span class="detail-value">Banco Nacional</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Cuenta No.:</span>
+                <span class="detail-value">XXXXXXXXXX</span>
+              </div>
+              <div class="detail-item">
+                <span class="detail-label">Titular:</span>
+                <span class="detail-value">Universidad XYZ</span>
+              </div>
+            </div>
+            <div class="upload-section">
+              <label for="transferProof" class="required"
+                >Comprobante de Transferencia</label
+              >
+              <div class="upload-area" id="uploadArea">
+                <span class="upload-icon">📤</span>
+                <span class="upload-text"
+                  >Arrastra o haz clic para subir el comprobante</span
+                >
+              </div>
+              <input
+                type="file"
+                id="transferProof"
+                name="transferProof"
+                accept="image/*,.pdf"
+                class="hidden"
+              />
+            </div>
+          </div>
+        </div>
+
+        <!-- Código QR (inicialmente oculto) -->
+        <div id="qrForm" class="payment-form hidden">
+          <div class="qr-container">
+            <img
+              src="/api/placeholder/200/200"
+              alt="Código QR de pago"
+              class="qr-code"
+            />
+            <div class="qr-instructions">
+              <p>1. Abre tu aplicación bancaria</p>
+              <p>2. Escanea el código QR</p>
+              <p>3. Confirma el monto y realiza el pago</p>
+              <p>4. El sistema actualizará automáticamente</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Información de Seguridad -->
+        <div class="security-info">
+          <div class="security-icon">🔒</div>
+          <div class="security-text">
+            <h4>Pago Seguro</h4>
+            <p>Sus datos están protegidos con encriptación de 256 bits</p>
+          </div>
+        </div>
+
+        <!-- Políticas y Términos -->
+        <div class="terms-section">
+          <label class="terms-label">
+            <input type="checkbox" name="acceptTerms" required />
+            <span
+              >He leído y acepto las políticas de pago y los términos y
+              condiciones</span
+            >
+          </label>
+        </div>
+
+        <div class="navigation">
+          <button type="button" class="btn btn-prev">Anterior</button>
+          <button type="submit" class="btn btn-pay">Procesar Pago</button>
+        </div>
+      </form>
+    </div>
+
+    <script src="../../js/utils/payment-validator.js"></script>
+    <script src="../../js/utils/payment-formatter.js"></script>
+    <script src="../../js/pages/admission-forms/payment.js"></script>
+  </body>
+</html>

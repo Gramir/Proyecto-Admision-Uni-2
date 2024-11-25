@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario de Admisión - Portal de Documentos</title>
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/components/progress-bar.css" />
+    <link rel="stylesheet" href="/css/components/forms.css" />
+    <link rel="stylesheet" href="/css/pages/admission-forms/documents.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <!-- Barra de Progreso -->
+      <div class="progress-container">
+        <div class="progress-bar-container">
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 28.52%"></div>
+          </div>
+        </div>
+        <div class="progress-steps">
+          <div class="step completed">
+            <div class="step-number">✓</div>
+            <span class="step-label">Personal</span>
+          </div>
+          <div class="step active">
+            <div class="step-number">2</div>
+            <span class="step-label">Documentos</span>
+          </div>
+          <div class="step">
+            <div class="step-number">3</div>
+            <span class="step-label">Generales</span>
+          </div>
+          <div class="step">
+            <div class="step-number">4</div>
+            <span class="step-label">Académica</span>
+          </div>
+          <div class="step">
+            <div class="step-number">5</div>
+            <span class="step-label">Accesibilidad</span>
+          </div>
+          <div class="step">
+            <div class="step-number">6</div>
+            <span class="step-label">Prueba</span>
+          </div>
+          <div class="step">
+            <div class="step-number">7</div>
+            <span class="step-label">Pago</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Formulario de Documentos -->
+      <form id="documentsForm" class="form-section">
+        <h2 class="form-title">PORTAL DE DOCUMENTOS</h2>
+
+        <div class="documents-list">
+          <h3 class="documents-subtitle">Lista de Documentos Requeridos</h3>
+
+          <!-- Documento de Identidad -->
+          <div class="document-item" data-document="identity">
+            <span class="document-icon">□</span>
+            <div class="document-info">
+              <div class="document-name">Documento de Identidad</div>
+              <div class="document-status">Pendiente</div>
+              <div class="document-details">
+                <div class="document-formats">
+                  Formatos permitidos: PDF, JPG, PNG (Max. 5MB)
+                </div>
+                <div class="verification-status pending">
+                  Pendiente de verificación
+                </div>
+              </div>
+              <div class="upload-progress">
+                <div class="progress-bar"></div>
+              </div>
+              <div class="document-preview"></div>
+              <div class="upload-error"></div>
+            </div>
+            <button type="button" class="btn-upload">Subir archivo</button>
+          </div>
+
+          <!-- Record de Notas -->
+          <div class="document-item" data-document="grades">
+            <span class="document-icon">△</span>
+            <div class="document-info">
+              <div class="document-name">Record de Notas</div>
+              <div class="document-status">Pendiente</div>
+              <div class="document-details">
+                <div class="document-formats">
+                  Formatos permitidos: PDF (Max. 10MB)
+                </div>
+                <div class="verification-status pending">
+                  Pendiente de verificación
+                </div>
+              </div>
+              <div class="upload-progress">
+                <div class="progress-bar"></div>
+              </div>
+              <div class="document-preview"></div>
+              <div class="upload-error"></div>
+            </div>
+            <button type="button" class="btn-upload">Subir archivo</button>
+          </div>
+
+          <!-- Foto 2x2 -->
+          <div class="document-item" data-document="photo">
+            <span class="document-icon">◊</span>
+            <div class="document-info">
+              <div class="document-name">Foto 2x2</div>
+              <div class="document-status">Pendiente</div>
+              <div class="document-details">
+                <div class="document-formats">
+                  Formatos permitidos: JPG, PNG (Max. 2MB)
+                </div>
+                <div class="verification-status pending">
+                  Pendiente de verificación
+                </div>
+              </div>
+              <div class="upload-progress">
+                <div class="progress-bar"></div>
+              </div>
+              <div class="document-preview"></div>
+              <div class="upload-error"></div>
+            </div>
+            <button type="button" class="btn-upload">Subir archivo</button>
+          </div>
+
+          <!-- Certificado Médico -->
+          <div class="document-item" data-document="medical">
+            <span class="document-icon">○</span>
+            <div class="document-info">
+              <div class="document-name">Certificado Médico</div>
+              <div class="document-status">Pendiente</div>
+              <div class="document-details">
+                <div class="document-formats">
+                  Formatos permitidos: PDF, JPG (Max. 5MB)
+                </div>
+                <div class="verification-status pending">
+                  Pendiente de verificación
+                </div>
+              </div>
+              <div class="upload-progress">
+                <div class="progress-bar"></div>
+              </div>
+              <div class="document-preview"></div>
+              <div class="upload-error"></div>
+            </div>
+            <button type="button" class="btn-upload">Subir archivo</button>
+          </div>
+        </div>
+
+        <!-- Navegación -->
+        <div class="navigation">
+          <button type="button" class="btn btn-prev">Anterior</button>
+          <button type="button" class="btn btn-next">Siguiente</button>
+        </div>
+      </form>
+    </div>
+
+    <script src="../../js/utils/file-handler.js"></script>
+    <script src="../../js/pages/admission-forms/documents.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // Forzar el ancho de la barra después de que todo se haya cargado
+        const progressFill = document.querySelector(".progress-fill");
+        if (progressFill) {
+          progressFill.style.width = "28.52%";
+          progressFill.style.transition = "none";
+          setTimeout(() => {
+            progressFill.style.transition = "";
+          }, 100);
+        }
+      });
+    </script>
+  </body>
+</html>

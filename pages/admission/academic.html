@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario de Admisión - Información Académica</title>
+    <link rel="stylesheet" href="../../css/main.css" />
+    <link rel="stylesheet" href="../../css/components/progress-bar.css" />
+    <link rel="stylesheet" href="../../css/components/forms.css" />
+    <link
+      rel="stylesheet"
+      href="../../css/pages/admission-forms/academic.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Barra de Progreso -->
+      <div class="progress-container">
+        <div class="progress-bar-container">
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 57.14%"></div>
+          </div>
+        </div>
+        <div class="progress-steps">
+          <div class="step completed">
+            <div class="step-number">✓</div>
+            <span class="step-label">Personal</span>
+          </div>
+          <div class="step completed">
+            <div class="step-number">✓</div>
+            <span class="step-label">Documentos</span>
+          </div>
+          <div class="step completed">
+            <div class="step-number">✓</div>
+            <span class="step-label">Generales</span>
+          </div>
+          <div class="step active">
+            <div class="step-number">4</div>
+            <span class="step-label">Académica</span>
+          </div>
+          <div class="step">
+            <div class="step-number">5</div>
+            <span class="step-label">Accesibilidad</span>
+          </div>
+          <div class="step">
+            <div class="step-number">6</div>
+            <span class="step-label">Prueba</span>
+          </div>
+          <div class="step">
+            <div class="step-number">7</div>
+            <span class="step-label">Pago</span>
+          </div>
+        </div>
+      </div>
+
+      <form id="academicForm" class="form-section">
+        <h2 class="form-title">Programa o Carrera de Interés</h2>
+
+        <div class="academic-grid">
+          <!-- Sección de Periodo y Tipo -->
+          <section class="selection-section">
+            <div class="form-group">
+              <label for="periodoIngreso" class="required"
+                >Periodo de Ingreso</label
+              >
+              <select
+                id="periodoIngreso"
+                name="periodoIngreso"
+                class="form-control"
+                required
+              >
+                <option value="">Seleccione periodo de ingreso</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="tipoCarrera" class="required">Tipo Carrera</label>
+              <select
+                id="tipoCarrera"
+                name="tipoCarrera"
+                class="form-control"
+                required
+              >
+                <option value="">Seleccione tipo de carrera</option>
+                <option value="grado">Grado</option>
+                <option value="postgrado">Postgrado</option>
+                <option value="maestria">Maestría</option>
+                <option value="doctorado">Doctorado</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="recinto" class="required">Recinto</label>
+              <select id="recinto" name="recinto" class="form-control" required>
+                <option value="">Seleccione un recinto</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="horario" class="required">Tanda/Horario</label>
+              <select id="horario" name="horario" class="form-control" required>
+                <option value="">Seleccione un horario</option>
+                <option value="manana">Mañana (8:00 AM - 12:00 PM)</option>
+                <option value="tarde">Tarde (2:00 PM - 6:00 PM)</option>
+                <option value="noche">Noche (6:00 PM - 10:00 PM)</option>
+                <option value="sabatino">Sabatino</option>
+              </select>
+            </div>
+          </section>
+
+          <!-- Sección de Programas -->
+          <section class="programs-section">
+            <h3 class="section-title">Seleccione programa o carrera</h3>
+            <div class="programs-grid" id="programsGrid">
+              <!-- Los programas se cargarán dinámicamente -->
+            </div>
+          </section>
+
+          <!-- Sección de Historial Académico -->
+          <section class="history-section">
+            <h3 class="section-title">Historial Académico</h3>
+
+            <div class="form-group">
+              <label for="centroBasica" class="required"
+                >¿Dónde cursó educación básica y media?</label
+              >
+              <div class="search-group">
+                <input
+                  type="text"
+                  id="centroBasica"
+                  name="centroBasica"
+                  class="form-control"
+                  required
+                  autocomplete="off"
+                />
+                <div class="search-results" id="basicaResults"></div>
+              </div>
+              <div class="not-found-option">
+                <label>
+                  <input type="checkbox" id="noEncuentroBasica" />
+                  No lo encontré
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="centroSuperior" class="required"
+                >¿Dónde cursó su educación superior?</label
+              >
+              <div class="search-group">
+                <input
+                  type="text"
+                  id="centroSuperior"
+                  name="centroSuperior"
+                  class="form-control"
+                  required
+                  autocomplete="off"
+                />
+                <div class="search-results" id="superiorResults"></div>
+              </div>
+              <div class="not-found-option">
+                <label>
+                  <input type="checkbox" id="noEncuentroSuperior" />
+                  No lo encontré
+                </label>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="fechaGraduacion">Fecha Graduación</label>
+              <input
+                type="date"
+                id="fechaGraduacion"
+                name="fechaGraduacion"
+                class="form-control"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="financiamiento" class="required"
+                >Financiamiento de Estudios</label
+              >
+              <select
+                id="financiamiento"
+                name="financiamiento"
+                class="form-control"
+                required
+              >
+                <option value="">Seleccione tipo de financiamiento</option>
+                <option value="propio">Recursos Propios</option>
+                <option value="familiar">Apoyo Familiar</option>
+                <option value="beca">Beca</option>
+                <option value="prestamo">Préstamo Educativo</option>
+                <option value="empresa">Apoyo Empresarial</option>
+              </select>
+            </div>
+          </section>
+        </div>
+
+        <div class="navigation">
+          <button type="button" class="btn btn-prev">Anterior</button>
+          <button type="button" class="btn btn-next">Siguiente</button>
+        </div>
+      </form>
+    </div>
+
+    <script src="../../js/utils/form-handlers.js"></script>
+    <script src="../../js/utils/academic-data.js"></script>
+    <script src="../../js/pages/admission-forms/academic.js"></script>
+  </body>
+</html>

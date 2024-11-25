@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario de Admisión - Evaluación de Accesibilidad</title>
+    <link rel="stylesheet" href="../../css/main.css" />
+    <link rel="stylesheet" href="../../css/components/progress-bar.css" />
+    <link rel="stylesheet" href="../../css/components/forms.css" />
+    <link
+      rel="stylesheet"
+      href="../../css/pages/admission-forms/accessibility.css"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Barra de Progreso -->
+      <div class="progress-container">
+        <div class="progress-bar-container">
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 71.42%"></div>
+          </div>
+        </div>
+        <div class="progress-steps">
+          <div class="step completed">
+            <div class="step-number">✓</div>
+            <span class="step-label">Personal</span>
+          </div>
+          <div class="step completed">
+            <div class="step-number">✓</div>
+            <span class="step-label">Documentos</span>
+          </div>
+          <div class="step completed">
+            <div class="step-number">✓</div>
+            <span class="step-label">Generales</span>
+          </div>
+          <div class="step completed">
+            <div class="step-number">✓</div>
+            <span class="step-label">Académica</span>
+          </div>
+          <div class="step active">
+            <div class="step-number">5</div>
+            <span class="step-label">Accesibilidad</span>
+          </div>
+          <div class="step">
+            <div class="step-number">6</div>
+            <span class="step-label">Prueba</span>
+          </div>
+          <div class="step">
+            <div class="step-number">7</div>
+            <span class="step-label">Pago</span>
+          </div>
+        </div>
+      </div>
+
+      <form id="accessibilityForm" class="form-section">
+        <h2 class="form-title">Evaluación de Accesibilidad</h2>
+
+        <div class="accessibility-info">
+          <p>
+            Esta información nos ayudará a brindarte un mejor servicio y
+            asegurar que tengas todas las facilidades necesarias durante tu
+            proceso de admisión y estudios.
+          </p>
+          <p>
+            Tus respuestas son confidenciales y serán utilizadas únicamente para
+            fines de apoyo estudiantil.
+          </p>
+        </div>
+
+        <div class="questions-container">
+          <!-- Visión -->
+          <div class="question-block" data-category="vision">
+            <h3 class="question-title">
+              <span class="question-number">1</span>
+              <span
+                >¿TIENE DIFICULTAD PARA VER, INCLUSO CUANDO USA LENTES?</span
+              >
+            </h3>
+            <div class="options-container">
+              <label class="option-label">
+                <input type="radio" name="vision" value="no_puedo" required />
+                <span class="option-text">NO PUEDO VER</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="vision" value="ninguna" required />
+                <span class="option-text">NO, NINGUNA</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="vision" value="cierta" required />
+                <span class="option-text">SÍ, CIERTA DIFICULTAD</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="vision" value="mucha" required />
+                <span class="option-text">SÍ, MUCHA DIFICULTAD</span>
+              </label>
+            </div>
+            <div class="additional-info hidden">
+              <label class="info-label">Especifique su condición visual:</label>
+              <textarea
+                class="form-control"
+                name="vision_details"
+                rows="2"
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- Audición -->
+          <div class="question-block" data-category="audicion">
+            <h3 class="question-title">
+              <span class="question-number">2</span>
+              <span
+                >¿TIENE DIFICULTAD PARA OÍR, INCLUSO CUANDO USA AUDÍFONOS?</span
+              >
+            </h3>
+            <div class="options-container">
+              <label class="option-label">
+                <input type="radio" name="audicion" value="no_puedo" required />
+                <span class="option-text">NO PUEDO OÍR</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="audicion" value="ninguna" required />
+                <span class="option-text">NO, NINGUNA</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="audicion" value="cierta" required />
+                <span class="option-text">SÍ, CIERTA DIFICULTAD</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="audicion" value="mucha" required />
+                <span class="option-text">SÍ, MUCHA DIFICULTAD</span>
+              </label>
+            </div>
+            <div class="additional-info hidden">
+              <label class="info-label"
+                >Especifique su condición auditiva:</label
+              >
+              <textarea
+                class="form-control"
+                name="audicion_details"
+                rows="2"
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- Movilidad -->
+          <div class="question-block" data-category="movilidad">
+            <h3 class="question-title">
+              <span class="question-number">3</span>
+              <span>¿TIENE DIFICULTAD PARA CAMINAR O SUBIR ESCALONES?</span>
+            </h3>
+            <div class="options-container">
+              <label class="option-label">
+                <input
+                  type="radio"
+                  name="movilidad"
+                  value="no_puedo"
+                  required
+                />
+                <span class="option-text">NO PUEDO</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="movilidad" value="ninguna" required />
+                <span class="option-text">NO, NINGUNA</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="movilidad" value="cierta" required />
+                <span class="option-text">SÍ, CIERTA DIFICULTAD</span>
+              </label>
+              <label class="option-label">
+                <input type="radio" name="movilidad" value="mucha" required />
+                <span class="option-text">SÍ, MUCHA DIFICULTAD</span>
+              </label>
+            </div>
+            <div class="additional-info hidden">
+              <label class="info-label"
+                >Especifique su condición de movilidad:</label
+              >
+              <textarea
+                class="form-control"
+                name="movilidad_details"
+                rows="2"
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- Concentración -->
+          <div class="question-block" data-category="concentracion">
+            <h3 class="question-title">
+              <span class="question-number">4</span>
+              <span>¿TIENE DIFICULTAD PARA RECORDAR O CONCENTRARSE?</span>
+            </h3>
+            <div class="options-container">
+              <label class="option-label">
+                <input
+                  type="radio"
+                  name="concentracion"
+                  value="ninguna"
+                  required
+                />
+                <span class="option-text">NO, NINGUNA</span>
+              </label>
+              <label class="option-label">
+                <input
+                  type="radio"
+                  name="concentracion"
+                  value="cierta"
+                  required
+                />
+                <span class="option-text">SÍ, CIERTA DIFICULTAD</span>
+              </label>
+              <label class="option-label">
+                <input
+                  type="radio"
+                  name="concentracion"
+                  value="mucha"
+                  required
+                />
+                <span class="option-text">SÍ, MUCHA DIFICULTAD</span>
+              </label>
+            </div>
+            <div class="additional-info hidden">
+              <label class="info-label">Especifique su condición:</label>
+              <textarea
+                class="form-control"
+                name="concentracion_details"
+                rows="2"
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- Comunicación -->
+          <div class="question-block" data-category="comunicacion">
+            <h3 class="question-title">
+              <span class="question-number">5</span>
+              <span
+                >¿TIENE DIFICULTAD PARA COMUNICARSE, POR EJEMPLO, ENTENDER A LOS
+                DEMÁS O QUE LO ENTIENDAN A USTED?</span
+              >
+            </h3>
+            <div class="options-container">
+              <label class="option-label">
+                <input
+                  type="radio"
+                  name="comunicacion"
+                  value="no_seguro"
+                  required
+                />
+                <span class="option-text">NO ESTOY SEGURO</span>
+              </label>
+              <label class="option-label">
+                <input
+                  type="radio"
+                  name="comunicacion"
+                  value="ninguna"
+                  required
+                />
+                <span class="option-text">NO, NINGUNA</span>
+              </label>
+              <label class="option-label">
+                <input
+                  type="radio"
+                  name="comunicacion"
+                  value="cierta"
+                  required
+                />
+                <span class="option-text">SÍ, CIERTA DIFICULTAD</span>
+              </label>
+              <label class="option-label">
+                <input
+                  type="radio"
+                  name="comunicacion"
+                  value="mucha"
+                  required
+                />
+                <span class="option-text">SÍ, MUCHA DIFICULTAD</span>
+              </label>
+            </div>
+            <div class="additional-info hidden">
+              <label class="info-label">Especifique su condición:</label>
+              <textarea
+                class="form-control"
+                name="comunicacion_details"
+                rows="2"
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- Comentarios Adicionales -->
+          <div class="additional-comments">
+            <h3 class="section-title">Comentarios Adicionales</h3>
+            <p class="section-description">
+              Si hay alguna otra condición o necesidad específica que debamos
+              conocer, por favor háganoslo saber:
+            </p>
+            <textarea
+              class="form-control"
+              name="comentarios_adicionales"
+              rows="4"
+            ></textarea>
+          </div>
+        </div>
+
+        <!-- Confirmación de Información -->
+        <div class="confirmation-section">
+          <label class="confirmation-label">
+            <input type="checkbox" name="confirmacion" required />
+            <span class="confirmation-text">
+              Confirmo que la información proporcionada es verdadera y autorizo
+              su uso para fines de apoyo estudiantil
+            </span>
+          </label>
+        </div>
+
+        <div class="navigation">
+          <button type="button" class="btn btn-prev">Anterior</button>
+          <button type="button" class="btn btn-next">Siguiente</button>
+        </div>
+      </form>
+    </div>
+
+    <script src="../../js/utils/form-handlers.js"></script>
+    <script src="../../js/pages/admission-forms/accessibility.js"></script>
+  </body>
+</html>

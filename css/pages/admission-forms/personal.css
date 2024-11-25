@@ -1,0 +1,137 @@
+/* Estilos específicos para el formulario personal */
+.contacts-section {
+  margin-top: var(--spacing-xl);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid var(--border-color);
+}
+
+.contacts-title {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  margin-bottom: var(--spacing-md);
+  font-weight: 500;
+}
+
+.contacts-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.contact-entry {
+  display: flex;
+  gap: var(--spacing-md);
+  align-items: start;
+  background: var(--secondary-color);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+}
+
+/* Continuación de los estilos del contacto */
+.contact-fields {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-md);
+  flex: 1;
+}
+
+.contact-fields input {
+  width: 100%;
+}
+
+/* Botones de agregar/eliminar contacto */
+.add-contact,
+.remove-contact {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  transition: background-color var(--transition-speed) ease;
+  flex-shrink: 0;
+}
+
+.add-contact {
+  background: var(--success-color);
+}
+
+.add-contact:hover {
+  background: #2e7d32;
+}
+
+.remove-contact {
+  background: var(--error-color);
+}
+
+.remove-contact:hover {
+  background: #c62828;
+}
+
+/* Validación específica para el formulario personal */
+.form-group[data-validate="cedula"] .form-control:invalid {
+  border-color: var(--error-color);
+}
+
+.form-group[data-validate="cedula"] .form-control:valid {
+  border-color: var(--success-color);
+}
+
+/* Tooltip para campos especiales */
+.form-group[data-tooltip] {
+  position: relative;
+}
+
+.form-group[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--border-radius);
+  font-size: 0.875rem;
+  z-index: 1000;
+  white-space: nowrap;
+  margin-top: var(--spacing-xs);
+}
+
+/* Animaciones */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.contact-entry {
+  animation: slideIn 0.3s ease;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .contact-fields {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-entry {
+    flex-direction: column;
+  }
+
+  .add-contact,
+  .remove-contact {
+    align-self: flex-end;
+    margin-top: var(--spacing-sm);
+  }
+}

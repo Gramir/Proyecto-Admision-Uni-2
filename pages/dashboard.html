@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard de Seguimiento</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/pages/dashboard.css" />
+    <link rel="stylesheet" href="../css/components/progress-bar.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1 class="dashboard-title">DASHBOARD DE SEGUIMIENTO</h1>
+
+      <div class="dashboard-grid">
+        <main class="main-section">
+          <!-- Progreso General -->
+          <section class="progress-section">
+            <h2 class="section-title">
+              Progreso General
+              <span
+                class="info-icon"
+                data-tooltip="Progreso total de tu proceso de admisión"
+                >i</span
+              >
+            </h2>
+            <div class="progress-bar">
+              <div class="progress-fill"></div>
+            </div>
+            <div class="progress-text">75% Completado</div>
+
+            <div class="status-boxes">
+              <div class="status-box">
+                <div class="status-title">
+                  Estado de Documentos
+                  <span
+                    class="info-icon"
+                    data-tooltip="Documentos requeridos para la admisión"
+                    >i</span
+                  >
+                </div>
+                <div class="status-value">4 de 5</div>
+                <a href="#" class="status-link">Ver detalles</a>
+              </div>
+              <div class="status-box">
+                <div class="status-title">
+                  Estado de Pago
+                  <span
+                    class="info-icon"
+                    data-tooltip="Estado actual de tu pago"
+                    >i</span
+                  >
+                </div>
+                <div class="status-value">Completado</div>
+                <a href="#" class="status-link">Ver recibo</a>
+              </div>
+            </div>
+          </section>
+
+          <!-- Próximos Pasos -->
+          <section class="steps-section">
+            <h2 class="section-title">Próximos Pasos</h2>
+            <div class="steps-list">
+              <div class="step active">1. Completar documento pendiente</div>
+              <div class="step">2. Asistir a prueba de admisión</div>
+              <div class="step">3. Esperar resultados</div>
+            </div>
+          </section>
+
+          <!-- Editar Información -->
+          <section class="edit-section">
+            <h2 class="section-title">
+              Editar Información
+              <span class="info-icon" data-tooltip="Actualiza tu información"
+                >i</span
+              >
+            </h2>
+            <div class="edit-list">
+              <!-- Estado Items -->
+            </div>
+          </section>
+        </main>
+
+        <aside class="side-section">
+          <h2 class="messages-title">Centro de Mensajes</h2>
+
+          <div class="messages-list">
+            <!-- Mensajes -->
+          </div>
+
+          <div class="help-section">
+            <h3 class="help-title">
+              <span>ℹ️</span>
+              Ayuda Contextual
+            </h3>
+            <p class="help-content">
+              ¿Necesitas ayuda con tu proceso? Contáctanos:
+            </p>
+            <div class="contact-info">
+              <div>📞 (123) 456-7890</div>
+              <div>✉️ admisiones@universidad.edu</div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <script src="../js/utils/tooltips.js"></script>
+    <script src="../js/pages/dashboard.js"></script>
+  </body>
+</html>

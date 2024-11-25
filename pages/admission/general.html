@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario de Admisión - Información General</title>
+    <link rel="stylesheet" href="../../css/main.css" />
+    <link rel="stylesheet" href="../../css/components/progress-bar.css" />
+    <link rel="stylesheet" href="../../css/components/forms.css" />
+    <link rel="stylesheet" href="../../css/pages/admission-forms/general.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Barra de Progreso -->
+      <div class="progress-container">
+        <div class="progress-bar-container">
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 42.85%"></div>
+          </div>
+        </div>
+        <div class="progress-steps">
+          <div class="step completed">
+            <div class="step-number">✓</div>
+            <span class="step-label">Personal</span>
+          </div>
+          <div class="step completed">
+            <div class="step-number">✓</div>
+            <span class="step-label">Documentos</span>
+          </div>
+          <div class="step active">
+            <div class="step-number">3</div>
+            <span class="step-label">Generales</span>
+          </div>
+          <div class="step">
+            <div class="step-number">4</div>
+            <span class="step-label">Académica</span>
+          </div>
+          <div class="step">
+            <div class="step-number">5</div>
+            <span class="step-label">Accesibilidad</span>
+          </div>
+          <div class="step">
+            <div class="step-number">6</div>
+            <span class="step-label">Prueba</span>
+          </div>
+          <div class="step">
+            <div class="step-number">7</div>
+            <span class="step-label">Pago</span>
+          </div>
+        </div>
+      </div>
+
+      <main class="main-content">
+        <form id="generalesForm">
+          <h2 class="form-title">Información General</h2>
+
+          <div class="form-grid">
+            <!-- Columna Dirección -->
+            <section class="form-section">
+              <h3 class="section-title">
+                <span class="section-icon">📍</span>
+                Dirección
+              </h3>
+              <div class="form-group">
+                <label for="pais" class="required">País</label>
+                <select id="pais" name="pais" class="form-control" required>
+                  <option value="REPÚBLICA DOMINICANA">
+                    REPÚBLICA DOMINICANA
+                  </option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="provincia" class="required">Provincia</label>
+                <select
+                  id="provincia"
+                  name="provincia"
+                  class="form-control"
+                  required
+                >
+                  <option value="">Seleccione una provincia</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="municipio" class="required">Municipio</label>
+                <select
+                  id="municipio"
+                  name="municipio"
+                  class="form-control"
+                  required
+                >
+                  <option value="">Seleccione un municipio</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="direccion" class="required">Calle y No.</label>
+                <textarea
+                  id="direccion"
+                  name="direccion"
+                  class="form-control"
+                  required
+                  maxlength="200"
+                  rows="3"
+                ></textarea>
+                <div class="char-count">0/200</div>
+              </div>
+
+              <div class="form-group">
+                <label for="telefono">Teléfono Fijo</label>
+                <input
+                  type="tel"
+                  id="telefono"
+                  name="telefono"
+                  class="form-control"
+                  placeholder="000-000-0000"
+                  pattern="\d{3}-\d{3}-\d{4}"
+                />
+                <div class="help-text">Formato: 000-000-0000</div>
+              </div>
+            </section>
+
+            <!-- Columna Contacto -->
+            <section class="form-section">
+              <h3 class="section-title">
+                <span class="section-icon">📱</span>
+                Contacto
+              </h3>
+              <div class="form-group">
+                <label for="celular" class="required">Celular</label>
+                <input
+                  type="tel"
+                  id="celular"
+                  name="celular"
+                  class="form-control"
+                  required
+                  placeholder="000-000-0000"
+                  pattern="\d{3}-\d{3}-\d{4}"
+                />
+                <div class="help-text">Formato: 000-000-0000</div>
+              </div>
+
+              <div class="form-group">
+                <label for="email" class="required">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  class="form-control"
+                  required
+                />
+                <div class="help-text">
+                  Utilice un email al que tenga acceso frecuente
+                </div>
+              </div>
+            </section>
+
+<!-- Columna Trabajo -->
+<section class="form-section">
+  <h3 class="section-title">
+    <span class="section-icon">💼</span>
+    Información Laboral
+  </h3>
+
+  <div class="form-group">
+    <label class="required">¿Labora actualmente?</label>
+    <div class="radio-options">
+      <label class="radio-label">
+        <input type="radio" name="labora" value="si">
+        <span>Sí</span>
+      </label>
+      <label class="radio-label">
+        <input type="radio" name="labora" value="no" checked>
+        <span>No</span>
+      </label>
+    </div>
+  </div>
+
+  <div id="infoLaboral" class="hidden">
+    <div class="form-group">
+      <label for="empresa">Nombre Empresa</label>
+      <input
+        type="text"
+        id="empresa"
+        name="empresa"
+        class="form-control"
+        maxlength="50"
+      />
+      <div class="char-count">0/50</div>
+    </div>
+
+    <div class="form-group">
+      <label for="cargo">Cargo</label>
+      <input
+        type="text"
+        id="cargo"
+        name="cargo"
+        class="form-control"
+        maxlength="50"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="telefonoTrabajo">Teléfono</label>
+      <input
+        type="tel"
+        id="telefonoTrabajo"
+        name="telefonoTrabajo"
+        class="form-control"
+        placeholder="000-000-0000"
+        pattern="\d{3}-\d{3}-\d{4}"
+      />
+    </div>
+
+    <!-- Nueva estructura de dirección laboral -->
+    <div class="form-group">
+      <label for="paisTrabajo">País</label>
+      <select id="paisTrabajo" name="paisTrabajo" class="form-control">
+        <option value="REPÚBLICA DOMINICANA">REPÚBLICA DOMINICANA</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="provinciaTrabajo">Provincia</label>
+      <select id="provinciaTrabajo" name="provinciaTrabajo" class="form-control">
+        <option value="">Seleccione una provincia</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="municipioTrabajo">Municipio</label>
+      <select id="municipioTrabajo" name="municipioTrabajo" class="form-control">
+        <option value="">Seleccione un municipio</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="calleTrabajoNo">Calle y No.</label>
+      <textarea
+        id="calleTrabajoNo"
+        name="calleTrabajoNo"
+        class="form-control"
+        rows="2"
+        maxlength="200"
+      ></textarea>
+      <div class="char-count">0/200</div>
+    </div>
+  </div>
+</section>
+
+          <div class="navigation">
+            <button type="button" class="btn btn-prev">Anterior</button>
+            <button type="button" class="btn btn-next">Siguiente</button>
+          </div>
+        </form>
+      </main>
+    </div>
+
+    <script src="../../js/utils/form-handlers.js"></script>
+    <script src="../../js/utils/location-data.js"></script>
+    <script src="../../js/pages/admission-forms/general.js"></script>
+  </body>
+</html>

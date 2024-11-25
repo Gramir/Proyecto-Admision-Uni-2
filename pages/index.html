@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Proceso Admisión</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/pages/login.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="header">
+        <div class="header__logo">
+          <img
+            src="/api/placeholder/120/40"
+            alt="Logo ICDA"
+            class="header__logo-img"
+          />
+        </div>
+        <div class="header__nav">
+          <div class="language-selector">
+            <a href="#" class="language-selector__link">ES</a> |
+            <a href="#" class="language-selector__link">EN</a>
+          </div>
+          <a href="#" class="header__help-link">Ayuda</a>
+        </div>
+      </header>
+
+      <main class="main-container">
+        <div class="login-box">
+          <h1 class="login-box__title">Proceso admisión</h1>
+
+          <div class="options-container">
+            <a href="#" class="option" data-panel="new">○ Soy Nuevo</a>
+            <a href="#" class="option" data-panel="existing"
+              >○ Ya inicié el proceso de Admisión</a
+            >
+          </div>
+
+          <div class="dynamic-panel"></div>
+        </div>
+      </main>
+
+      <footer class="footer">
+        <nav class="footer__nav">
+          <a href="#" class="footer__link">Contacto</a>
+          <span class="footer__separator">|</span>
+          <a href="#" class="footer__link">Soporte</a>
+          <span class="footer__separator">|</span>
+          <a href="#" class="footer__link">Políticas</a>
+        </nav>
+      </footer>
+    </div>
+
+    <script src="../js/utils/form-handlers.js"></script>
+    <script src="../js/pages/login.js"></script>
+  </body>
+</html>

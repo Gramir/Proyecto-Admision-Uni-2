@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulario de Admisión - Prueba de Admisión</title>
+    <link rel="stylesheet" href="../../css/main.css" />
+    <link rel="stylesheet" href="../../css/components/progress-bar.css" />
+    <link rel="stylesheet" href="../../css/components/forms.css" />
+    <link rel="stylesheet" href="../../css/components/calendar.css" />
+    <link rel="stylesheet" href="../../css/pages/admission-forms/exam.css" />
+  </head>
+  <body>
+    <div class="container">
+      <!-- Barra de Progreso -->
+      <div class="progress-container">
+        <div class="progress-bar-container">
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: 85.71%"></div>
+          </div>
+        </div>
+        <div class="progress-steps">
+          <div class="step completed">
+            <div class="step-number">✓</div>
+            <span class="step-label">Personal</span>
+          </div>
+          <div class="step completed">
+            <div class="step-number">✓</div>
+            <span class="step-label">Documentos</span>
+          </div>
+          <div class="step completed">
+            <div class="step-number">✓</div>
+            <span class="step-label">Generales</span>
+          </div>
+          <div class="step completed">
+            <div class="step-number">✓</div>
+            <span class="step-label">Académica</span>
+          </div>
+          <div class="step completed">
+            <div class="step-number">✓</div>
+            <span class="step-label">Accesibilidad</span>
+          </div>
+          <div class="step active">
+            <div class="step-number">6</div>
+            <span class="step-label">Prueba</span>
+          </div>
+          <div class="step">
+            <div class="step-number">7</div>
+            <span class="step-label">Pago</span>
+          </div>
+        </div>
+      </div>
+
+      <form id="examForm" class="form-section">
+        <h2 class="form-title">CALENDARIO DE PRUEBAS DE ADMISIÓN</h2>
+
+        <div class="exam-info">
+          <p>
+            Seleccione la fecha y hora para realizar su prueba de admisión.
+            Asegúrese de elegir un horario que le permita asistir puntualmente.
+          </p>
+          <p>La prueba tiene una duración aproximada de 3 horas.</p>
+        </div>
+
+        <div class="calendar-section">
+          <!-- Selector de Periodo -->
+          <div class="period-selector">
+            <label for="examPeriod">Periodo de Prueba</label>
+            <select
+              id="examPeriod"
+              name="examPeriod"
+              class="form-control"
+              required
+            >
+              <option value="">Seleccione un periodo</option>
+            </select>
+          </div>
+
+          <div class="scheduling-grid">
+            <!-- Calendario -->
+            <div class="calendar-container">
+              <div class="calendar-header">
+                <button
+                  type="button"
+                  class="btn-month prev-month"
+                  aria-label="Mes anterior"
+                >
+                  ←
+                </button>
+                <h3 class="current-month">Enero 2025</h3>
+                <button
+                  type="button"
+                  class="btn-month next-month"
+                  aria-label="Mes siguiente"
+                >
+                  →
+                </button>
+              </div>
+              <div class="calendar-days">
+                <span>Dom</span>
+                <span>Lun</span>
+                <span>Mar</span>
+                <span>Mié</span>
+                <span>Jue</span>
+                <span>Vie</span>
+                <span>Sáb</span>
+              </div>
+              <div class="calendar-dates">
+                <!-- Las fechas se generarán dinámicamente -->
+              </div>
+            </div>
+
+            <!-- Detalles y Horarios -->
+            <div class="schedule-details">
+              <div class="selected-date-info">
+                <h3>Fecha Seleccionada</h3>
+                <p id="selectedDate">Seleccione una fecha disponible</p>
+              </div>
+
+              <div class="time-slots">
+                <h3>Horarios Disponibles</h3>
+                <div id="timeSlots" class="time-slots-grid">
+                  <!-- Los horarios se generarán dinámicamente -->
+                </div>
+              </div>
+
+              <div class="exam-details hidden">
+                <h3>Detalles de la Prueba</h3>
+                <ul class="details-list">
+                  <li>
+                    <span class="detail-icon">📍</span>
+                    <span id="examLocation">Campus Principal, Aula 101</span>
+                  </li>
+                  <li>
+                    <span class="detail-icon">⏱️</span>
+                    <span>Duración: 3 horas</span>
+                  </li>
+                  <li>
+                    <span class="detail-icon">📋</span>
+                    <span>Requisitos:</span>
+                    <ul class="sub-list">
+                      <li>Documento de identidad</li>
+                      <li>Comprobante de pago</li>
+                      <li>Lápiz y borrador</li>
+                    </ul>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <!-- Adaptaciones Especiales -->
+          <div id="specialAccommodations" class="accommodations-section hidden">
+            <h3>Adaptaciones Especiales</h3>
+            <p>
+              Basado en la información de accesibilidad proporcionada, se
+              realizarán las siguientes adaptaciones:
+            </p>
+            <ul class="accommodations-list">
+              <!-- Las adaptaciones se generarán dinámicamente -->
+            </ul>
+            <div class="confirmation-checkbox">
+              <label>
+                <input type="checkbox" name="confirmAdaptations" required />
+                <span
+                  >He revisado y confirmo las adaptaciones especiales para mi
+                  prueba</span
+                >
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Notas Importantes -->
+        <div class="important-notes">
+          <h3>Notas Importantes</h3>
+          <ul>
+            <li>Llegue al menos 15 minutos antes de la hora programada</li>
+            <li>
+              La fecha de admisión se confirmará una vez efectuado el pago
+              correspondiente
+            </li>
+            <li>
+              En caso de no poder asistir, debe notificar con al menos 48 horas
+              de anticipación
+            </li>
+          </ul>
+        </div>
+
+        <div class="navigation">
+          <button type="button" class="btn btn-prev">Anterior</button>
+          <button type="button" class="btn btn-next">Siguiente</button>
+        </div>
+      </form>
+    </div>
+
+    <script src="../../js/utils/date-utils.js"></script>
+    <script src="../../js/utils/exam-data.js"></script>
+    <script src="../../js/pages/admission-forms/exam.js"></script>
+  </body>
+</html>

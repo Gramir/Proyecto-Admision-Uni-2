@@ -1,0 +1,265 @@
+/* Upload area continued */
+.upload-icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: var(--spacing-sm);
+}
+
+.upload-text {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Código QR */
+.qr-container {
+  display: flex;
+  gap: var(--spacing-xl);
+  align-items: center;
+  padding: var(--spacing-lg);
+}
+
+.qr-code {
+  border: 1px solid var(--border-color);
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  background: white;
+}
+
+.qr-instructions {
+  flex: 1;
+}
+
+.qr-instructions p {
+  margin-bottom: var(--spacing-sm);
+  color: #666;
+  position: relative;
+  padding-left: var(--spacing-lg);
+}
+
+.qr-instructions p::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--primary-color);
+}
+
+/* Información de seguridad */
+.security-info {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md);
+  background-color: #f0fdf4;
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-lg);
+}
+
+.security-icon {
+  font-size: 1.5rem;
+  color: var(--success-color);
+}
+
+.security-text h4 {
+  color: var(--success-color);
+  margin-bottom: var(--spacing-xs);
+}
+
+.security-text p {
+  font-size: 0.9rem;
+  color: #166534;
+}
+
+/* Términos y condiciones */
+.terms-section {
+  margin-bottom: var(--spacing-lg);
+}
+
+.terms-label {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  cursor: pointer;
+}
+
+.terms-label input[type="checkbox"] {
+  margin-top: 0.25rem;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary-color);
+}
+
+.terms-label span {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Botón de pago */
+.btn-pay {
+  background-color: var(--success-color);
+  color: white;
+  border-color: var(--success-color);
+  min-width: 200px;
+}
+
+.btn-pay:hover:not(:disabled) {
+  background-color: #15803d;
+  border-color: #15803d;
+}
+
+.btn-pay:disabled {
+  background-color: #d1d5db;
+  border-color: #d1d5db;
+  cursor: not-allowed;
+}
+
+/* Estados de carga */
+.loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.loading::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--border-radius);
+}
+
+.loading::before {
+  content: "⌛";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  font-size: 1.5rem;
+}
+
+/* Mensajes de error y éxito */
+.payment-error,
+.payment-success {
+  padding: var(--spacing-md);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+.payment-error {
+  background-color: #fef2f2;
+  border: 1px solid #fee2e2;
+  color: #991b1b;
+}
+
+.payment-success {
+  background-color: #f0fdf4;
+  border: 1px solid #dcfce7;
+  color: #166534;
+}
+
+/* Animaciones */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.loading::before {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.payment-form:not(.hidden) {
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .payment-methods {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .qr-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .qr-instructions {
+    text-align: left;
+  }
+}
+
+@media (max-width: 768px) {
+  .payment-methods {
+    grid-template-columns: 1fr;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .payment-form {
+    padding: var(--spacing-md);
+  }
+}
+
+/* Modo oscuro */
+@media (prefers-color-scheme: dark) {
+  .payment-form {
+    background: #1a1a1a;
+  }
+
+  .security-info {
+    background-color: #1a2e1a;
+  }
+
+  .payment-error {
+    background-color: #2d1619;
+    border-color: #4d262b;
+  }
+
+  .payment-success {
+    background-color: #1a2e1a;
+    border-color: #2f4f2f;
+  }
+
+  .upload-area {
+    background-color: #262626;
+  }
+
+  .qr-code {
+    background-color: white;
+  }
+}
+
+/* Soporte para movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  .payment-form:not(.hidden) {
+    animation: none;
+  }
+
+  .loading::before {
+    animation: none;
+  }
+}

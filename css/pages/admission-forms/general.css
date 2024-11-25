@@ -1,0 +1,151 @@
+/* Estilos específicos para el formulario general */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.form-section {
+  background: white;
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  position: relative; /* Asegura el contexto de posicionamiento */
+  width: 100%;
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  font-size: 1.2rem;
+  color: var(--text-color);
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.section-icon {
+  font-size: 1.4rem;
+  line-height: 1;
+}
+
+/* Radio buttons */
+.radio-options {
+  display: flex;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-xs);
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  cursor: pointer;
+}
+
+.radio-label input[type="radio"] {
+  margin: 0;
+  width: 18px;
+  height: 18px;
+  accent-color: var(--primary-color);
+}
+
+/* Estado oculto */
+.hidden {
+  display: none;
+}
+
+/* Ajustes específicos para los campos de formulario */
+textarea.form-control {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* Estilo para selects encadenados (provincia-municipio) */
+.form-group[data-depends] {
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.form-group[data-depends].enabled {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.form-section .navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-md);
+  border-top: 1px solid var(--border-color);
+  clear: both; /* Asegura que esté debajo de todo el contenido */
+}
+
+.form-section .btn {
+  min-width: 120px; /* Asegura un ancho mínimo para los botones */
+}
+
+.form-section .btn-prev {
+  margin-right: auto;
+}
+
+.form-section .btn-next {
+  margin-left: auto;
+}
+/* Estilos para validación en tiempo real */
+.form-control:valid {
+  border-color: var(--success-color);
+}
+
+.form-control:invalid:not(:placeholder-shown) {
+  border-color: var(--error-color);
+}
+
+/* Estilos para los mensajes de ayuda */
+.help-text {
+  font-size: 0.875rem;
+  color: #666;
+  margin-top: var(--spacing-xs);
+  transition: color var(--transition-speed) ease;
+}
+
+.form-group.has-error .help-text {
+  color: var(--error-color);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .form-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .form-section {
+    padding: var(--spacing-md);
+  }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.form-section {
+  animation: fadeIn 0.3s ease-out;
+}

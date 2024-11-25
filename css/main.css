@@ -1,0 +1,104 @@
+/* Variables globales */
+:root {
+  --primary-color: #000000;
+  --secondary-color: #f5f5f7;
+  --text-color: #1a1a1a;
+  --border-color: #ddd;
+  --success-color: #43a047;
+  --error-color: #dc2626;
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --border-radius: 4px;
+  --transition-speed: 0.3s;
+}
+
+/* Reset y estilos base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--secondary-color);
+  color: var(--text-color);
+  line-height: 1.5;
+}
+
+/* Layout base */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 0 var(--spacing-sm);
+}
+
+/* Header común */
+.header {
+  padding: var(--spacing-sm) 0;
+  border-bottom: 1px dashed var(--primary-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.header__logo-img {
+  height: 40px;
+  width: auto;
+}
+
+.header__nav {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+/* Footer común */
+.footer {
+  padding: var(--spacing-sm) 0;
+  text-align: center;
+  border-top: 1px dashed var(--primary-color);
+  width: 100%;
+}
+
+.footer__nav {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-sm);
+}
+
+.footer__link {
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.footer__separator {
+  color: var(--border-color);
+}
+
+/* Utilidades comunes */
+.hidden {
+  display: none !important;
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 var(--spacing-xs);
+  }
+
+  .header {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+}
