@@ -12,11 +12,14 @@ class AcademicFormController {
     this.recintoSelect = document.getElementById("recinto");
     this.horarioSelect = document.getElementById("horario");
 
-    // Referencias a campos de búsqueda
-    this.centroBasicaInput = document.getElementById("centroBasica");
-    this.centroSuperiorInput = document.getElementById("centroSuperior");
-    this.basicaResults = document.getElementById("basicaResults");
-    this.superiorResults = document.getElementById("superiorResults");
+    // Referencias a campos de educación
+    this.centroBasica = document.getElementById("centroBasica");
+    this.centroBasicaManual = document.getElementById("centroBasicaManual");
+    this.noEncuentroBasica = document.getElementById("noEncuentroBasica");
+
+    this.centroSuperior = document.getElementById("centroSuperior");
+    this.centroSuperiorManual = document.getElementById("centroSuperiorManual");
+    this.noEncuentroSuperior = document.getElementById("noEncuentroSuperior");
 
     // Estado del formulario
     this.selectedProgram = null;
@@ -32,16 +35,99 @@ class AcademicFormController {
       saveDelay: 1000,
     });
 
+    // Inicializar
     this.init();
   }
 
   init() {
     this.setupSelects();
-    this.setupSearchFields();
+    this.setupEducationFields();
+    this.setupValidationMessages();
     this.setupCheckboxes();
     this.setupValidation();
     this.setupNavigation();
     this.loadSavedData();
+  }
+
+  setupEducationFields() {
+    if (!this.centroBasica || !this.centroSuperior) return;
+
+    // Cargar opciones desde AcademicData
+    this.loadEducationOptions(this.centroBasica, "basica");
+    this.loadEducationOptions(this.centroSuperior, "superior");
+
+    // Setup event listeners para los checkboxes de "No lo encontré"
+    if (this.noEncuentroBasica) {
+      this.setupNotFoundToggle(
+        this.noEncuentroBasica,
+        this.centroBasica,
+        this.centroBasicaManual
+      );
+    }
+
+    if (this.noEncuentroSuperior) {
+      this.setupNotFoundToggle(
+        this.noEncuentroSuperior,
+        this.centroSuperior,
+        this.centroSuperiorManual
+      );
+    }
+  }
+
+  loadEducationOptions(selectElement, type) {
+    if (!selectElement || !AcademicData.centrosEducativos[type]) return;
+
+    const centros = AcademicData.centrosEducativos[type];
+    centros.forEach((centro) => {
+      const option = document.createElement("option");
+      option.value = centro.id;
+      option.textContent = `${centro.nombre} (${centro.tipo})`;
+      selectElement.appendChild(option);
+    });
+  }
+
+  setupNotFoundToggle(checkbox, selectElement, manualInput) {
+    if (!checkbox || !selectElement || !manualInput) return;
+
+    checkbox.addEventListener("change", (e) => {
+      if (e.target.checked) {
+        selectElement.disabled = true;
+        selectElement.required = false;
+        selectElement.value = "";
+        manualInput.classList.remove("hidden");
+        manualInput.required = true;
+      } else {
+        selectElement.disabled = false;
+        selectElement.required = true;
+        manualInput.classList.add("hidden");
+        manualInput.required = false;
+        manualInput.value = "";
+      }
+    });
+  }
+
+  setupValidationMessages() {
+    if (!this.form) return;
+
+    const elements = this.form.querySelectorAll("input, select, textarea");
+    elements.forEach((element) => {
+      // Configurar mensajes de error personalizados
+      element.addEventListener("invalid", (e) => {
+        e.preventDefault();
+        if (e.target.validity.valueMissing) {
+          e.target.setCustomValidity("Por favor, complete este campo");
+        } else if (e.target.validity.patternMismatch) {
+          e.target.setCustomValidity("El formato ingresado no es válido");
+        } else if (e.target.validity.typeMismatch) {
+          e.target.setCustomValidity("Por favor, ingrese un valor válido");
+        }
+      });
+
+      // Limpiar mensaje cuando el usuario modifica el campo
+      element.addEventListener("input", (e) => {
+        e.target.setCustomValidity("");
+      });
+    });
   }
 
   setupSelects() {
@@ -96,21 +182,27 @@ class AcademicFormController {
       return;
     }
 
+    // Get programs and ensure they exist
     const programas = AcademicData.getProgramasByRecinto(recintoId).filter(
-      (programa) => !tipoCarrera || programa.tipo === tipoCarrera
+      (programa) => programa != null
     );
 
-    if (programas.length === 0) {
+    // Filter by tipo if selected
+    const programasFiltrados = tipoCarrera
+      ? programas.filter((programa) => programa.tipo === tipoCarrera)
+      : programas;
+
+    if (programasFiltrados.length === 0) {
       this.programsGrid.innerHTML =
         '<p class="no-programs">No hay programas disponibles con los criterios seleccionados.</p>';
       return;
     }
 
-    this.programsGrid.innerHTML = programas
+    this.programsGrid.innerHTML = programasFiltrados
       .map((programa) => this.createProgramCard(programa, horario))
       .join("");
 
-    // Restaurar programa seleccionado si existe
+    // Restore selected program if exists
     if (this.selectedProgram) {
       const radio = this.programsGrid.querySelector(
         `input[value="${this.selectedProgram}"]`
@@ -121,7 +213,7 @@ class AcademicFormController {
       }
     }
 
-    // Agregar event listeners
+    // Add event listeners
     this.programsGrid.querySelectorAll(".program-card").forEach((card) => {
       card.addEventListener("click", (e) => {
         if (!e.target.classList.contains("btn-details")) {
@@ -390,7 +482,7 @@ class AcademicFormController {
       if (this.validateForm()) {
         this.saveAndNavigate();
       } else {
-        this.showValidationErrors();
+        this.showFormErrors();
       }
     });
   }

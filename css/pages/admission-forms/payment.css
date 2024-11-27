@@ -9,7 +9,147 @@
   color: #666;
   font-size: 0.9rem;
 }
+/* Payment Portal Styles */
+.payment-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
 
+/* Cost Summary */
+.cost-summary {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: #f8fafc;
+  border-radius: 8px;
+}
+
+.cost-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.cost-item:last-child {
+  border-bottom: none;
+  margin-top: 1rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid #e2e8f0;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.cost-value {
+  font-family: "Roboto Mono", monospace;
+  color: #1a202c;
+}
+
+/* Payment Methods */
+.payment-methods {
+  margin: 2rem 0;
+}
+
+.payment-method {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.payment-method:hover {
+  border-color: #3b82f6;
+  background: #f8fafc;
+}
+
+.payment-method.selected {
+  border-color: #3b82f6;
+  background: #eff6ff;
+}
+
+.method-icon {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  color: #3b82f6;
+}
+
+.method-details {
+  flex: 1;
+}
+
+.method-name {
+  font-weight: 600;
+  color: #1a202c;
+  margin-bottom: 0.25rem;
+}
+
+.method-description {
+  font-size: 0.875rem;
+  color: #64748b;
+}
+
+/* QR Code Section */
+.qr-container {
+  display: flex;
+  gap: 2rem;
+  padding: 2rem;
+  background: #f8fafc;
+  border-radius: 8px;
+  margin: 2rem 0;
+}
+
+.qr-code {
+  width: 180px;
+  height: 180px;
+  padding: 1rem;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.qr-instructions {
+  flex: 1;
+}
+
+.qr-instructions ol {
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.qr-instructions li {
+  margin-bottom: 1rem;
+  color: #374151;
+  line-height: 1.5;
+}
+
+/* Security Info */
+.security-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f0fdf4;
+  border-radius: 8px;
+  margin-top: 2rem;
+}
+
+.security-icon {
+  font-size: 1.5rem;
+  color: #059669;
+}
+
+.security-text {
+  color: #065f46;
+  font-size: 0.875rem;
+}
 /* Código QR */
 .qr-container {
   display: flex;
@@ -221,35 +361,6 @@
 
   .payment-form {
     padding: var(--spacing-md);
-  }
-}
-
-/* Modo oscuro */
-@media (prefers-color-scheme: dark) {
-  .payment-form {
-    background: #1a1a1a;
-  }
-
-  .security-info {
-    background-color: #1a2e1a;
-  }
-
-  .payment-error {
-    background-color: #2d1619;
-    border-color: #4d262b;
-  }
-
-  .payment-success {
-    background-color: #1a2e1a;
-    border-color: #2f4f2f;
-  }
-
-  .upload-area {
-    background-color: #262626;
-  }
-
-  .qr-code {
-    background-color: white;
   }
 }
 

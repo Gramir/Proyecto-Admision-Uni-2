@@ -236,34 +236,6 @@
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
 }
 
-/* Soporte para modo oscuro */
-@media (prefers-color-scheme: dark) {
-  .question-block {
-    background: #2d2d2d;
-  }
-
-  .option-label {
-    border-color: #404040;
-  }
-
-  .option-label:hover {
-    background-color: #353535;
-  }
-
-  .additional-info {
-    background-color: #353535;
-  }
-
-  .confirmation-section {
-    background-color: #1a2e1a;
-    border-color: #2f4f2f;
-  }
-
-  .confirmation-text {
-    color: #90cfa4;
-  }
-}
-
 /* Responsive */
 @media (max-width: 768px) {
   .question-title {

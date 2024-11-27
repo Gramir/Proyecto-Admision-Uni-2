@@ -231,3 +231,7 @@
     padding: var(--spacing-sm);
   }
 }
+
+.hidden {
+  display: none !important;
+}

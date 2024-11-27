@@ -44,6 +44,114 @@ class PaymentFormController {
     this.loadSavedData();
   }
 
+  loadSavedData() {
+    // Intentar cargar datos guardados
+    const savedData = localStorage.getItem("admissionForm_payment");
+    if (!savedData) return;
+
+    try {
+      const data = JSON.parse(savedData);
+
+      // Restaurar método de pago seleccionado
+      if (data.paymentMethod) {
+        const methodInput = this.form.querySelector(
+          `input[name="paymentMethod"][value="${data.paymentMethod}"]`
+        );
+        if (methodInput) {
+          methodInput.checked = true;
+          // Mostrar el formulario correspondiente
+          this.showPaymentForm(data.paymentMethod);
+        }
+      }
+
+      // Restaurar datos de tarjeta si existen
+      if (data.cardData) {
+        Object.entries(data.cardData).forEach(([field, value]) => {
+          const input = this.form.elements[field];
+          if (input) {
+            input.value = value;
+          }
+        });
+      }
+
+      // Restaurar estado de términos y condiciones
+      const termsCheckbox = this.form.querySelector(
+        'input[name="acceptTerms"]'
+      );
+      if (termsCheckbox && data.acceptTerms) {
+        termsCheckbox.checked = data.acceptTerms;
+      }
+    } catch (error) {
+      console.error("Error al cargar datos guardados:", error);
+    }
+  }
+
+  /**
+   * Muestra el formulario correspondiente al método de pago
+   */
+  showPaymentForm(method) {
+    // Ocultar todos los formularios
+    ["cardForm", "transferForm", "qrForm"].forEach((formId) => {
+      const form = document.getElementById(formId);
+      if (form) {
+        form.classList.add("hidden");
+      }
+    });
+
+    // Mostrar el formulario seleccionado
+    const formId = `${method}Form`;
+    const selectedForm = document.getElementById(formId);
+    if (selectedForm) {
+      selectedForm.classList.remove("hidden");
+    }
+
+    // Actualizar campos requeridos
+    this.updateRequiredFields(method);
+  }
+
+  /**
+   * Actualiza los campos requeridos según el método de pago
+   */
+  updateRequiredFields(method) {
+    // Campos de tarjeta
+    const cardFields = ["cardNumber", "cardExpiry", "cardCvc", "cardName"];
+    cardFields.forEach((fieldId) => {
+      const field = document.getElementById(fieldId);
+      if (field) {
+        field.required = method === "card";
+      }
+    });
+
+    // Campo de comprobante de transferencia
+    if (this.transferProof) {
+      this.transferProof.required = method === "transfer";
+    }
+  }
+
+  /**
+   * Guarda el estado actual del formulario
+   */
+  saveCurrentState() {
+    const formData = this.formHandler.getFormData();
+
+    // Preparar datos para guardar
+    const dataToSave = {
+      paymentMethod: formData.paymentMethod,
+      acceptTerms: formData.acceptTerms === "on",
+      cardData:
+        formData.paymentMethod === "card"
+          ? {
+              cardNumber: formData.cardNumber,
+              cardName: formData.cardName,
+              cardExpiry: formData.cardExpiry,
+              // No guardamos el CVC por seguridad
+            }
+          : null,
+    };
+
+    localStorage.setItem("admissionForm_payment", JSON.stringify(dataToSave));
+  }
+
   setupCostSummary() {
     const formatted = PaymentFormatter.formatCostSummary(this.costs);
 

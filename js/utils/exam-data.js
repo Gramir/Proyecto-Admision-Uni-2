@@ -103,12 +103,14 @@ const ExamData = {
 
       fechas.forEach((fecha) => {
         const fechaStr = DateUtils.formatDate(fecha, "iso");
+
         this.ocupacion[fechaStr] = {};
 
         this.horarios.forEach((horario) => {
+          const disponibles = Math.floor(Math.random() * horario.capacidad);
           this.ocupacion[fechaStr][horario.id] = {
-            disponibles: horario.capacidad,
-            reservados: 0,
+            disponibles: disponibles,
+            reservados: horario.capacidad - disponibles,
           };
         });
       });

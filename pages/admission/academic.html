@@ -124,46 +124,58 @@
               <label for="centroBasica" class="required"
                 >¿Dónde cursó educación básica y media?</label
               >
-              <div class="search-group">
-                <input
-                  type="text"
-                  id="centroBasica"
-                  name="centroBasica"
-                  class="form-control"
-                  required
-                  autocomplete="off"
-                />
-                <div class="search-results" id="basicaResults"></div>
-              </div>
+              <select
+                id="centroBasica"
+                name="centroBasica"
+                class="form-control"
+                required
+              >
+                <option value="">Seleccione un centro educativo</option>
+                <!-- Las opciones se cargarán dinámicamente -->
+              </select>
               <div class="not-found-option">
                 <label>
                   <input type="checkbox" id="noEncuentroBasica" />
                   No lo encontré
                 </label>
               </div>
+              <!-- Input que se mostrará cuando se marque "No lo encontré" -->
+              <input
+                type="text"
+                id="centroBasicaManual"
+                name="centroBasicaManual"
+                class="form-control hidden"
+                placeholder="Digite el nombre del centro educativo"
+              />
             </div>
 
             <div class="form-group">
               <label for="centroSuperior" class="required"
                 >¿Dónde cursó su educación superior?</label
               >
-              <div class="search-group">
-                <input
-                  type="text"
-                  id="centroSuperior"
-                  name="centroSuperior"
-                  class="form-control"
-                  required
-                  autocomplete="off"
-                />
-                <div class="search-results" id="superiorResults"></div>
-              </div>
+              <select
+                id="centroSuperior"
+                name="centroSuperior"
+                class="form-control"
+                required
+              >
+                <option value="">Seleccione un centro educativo</option>
+                <!-- Las opciones se cargarán dinámicamente -->
+              </select>
               <div class="not-found-option">
                 <label>
                   <input type="checkbox" id="noEncuentroSuperior" />
                   No lo encontré
                 </label>
               </div>
+              <!-- Input que se mostrará cuando se marque "No lo encontré" -->
+              <input
+                type="text"
+                id="centroSuperiorManual"
+                name="centroSuperiorManual"
+                class="form-control hidden"
+                placeholder="Digite el nombre del centro educativo"
+              />
             </div>
 
             <div class="form-group">

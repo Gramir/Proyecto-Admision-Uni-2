@@ -1,27 +1,16 @@
 /**
  * Controlador del formulario de prueba de admisión
+ * Gestiona la selección de fechas y horarios para pruebas de admisión
  */
 class ExamFormController {
   constructor() {
-    this.form = document.getElementById("examForm");
+    // Inicializar referencias al DOM y estado
+    this.initializeDOMReferences();
 
-    // Referencias a elementos del calendario
-    this.currentMonth = new Date();
-    this.selectedDate = null;
-    this.selectedTimeSlot = null;
+    // Inicializar estado del controlador
+    this.initializeState();
 
-    // Referencias a elementos del DOM
-    this.calendarDates = document.querySelector(".calendar-dates");
-    this.currentMonthElement = document.querySelector(".current-month");
-    this.timeSlotsContainer = document.getElementById("timeSlots");
-    this.selectedDateInfo = document.getElementById("selectedDate");
-    this.examDetails = document.querySelector(".exam-details");
-    this.examLocation = document.getElementById("examLocation");
-    this.specialAccommodations = document.getElementById(
-      "specialAccommodations"
-    );
-
-    // Inicializar manejador de formulario
+    // Crear manejador de formulario
     this.formHandler = new FormHandler(this.form, {
       autoSave: true,
       validateOnChange: true,
@@ -31,19 +20,45 @@ class ExamFormController {
     this.init();
   }
 
+  initializeDOMReferences() {
+    this.form = document.getElementById("examForm");
+    this.calendarDates = document.querySelector(".calendar-dates");
+    this.currentMonthElement = document.querySelector(".current-month");
+    this.timeSlotsContainer = document.getElementById("timeSlots");
+    this.selectedDateInfo = document.getElementById("selectedDate");
+    this.examDetails = document.querySelector(".exam-details");
+    this.examLocation = document.getElementById("examLocation");
+    this.specialAccommodations = document.getElementById(
+      "specialAccommodations"
+    );
+    this.periodSelect = document.getElementById("examPeriod");
+
+    // Verificar elementos críticos
+    if (!this.calendarDates)
+      console.error("Calendar dates container not found");
+    if (!this.currentMonthElement)
+      console.error("Current month element not found");
+    if (!this.periodSelect) console.error("Period select not found");
+  }
+
+  initializeState() {
+    this.currentMonth = new Date();
+    this.selectedDate = null;
+    this.selectedTimeSlot = null;
+    this.activePeriod = null; // Controla el periodo actualmente seleccionado
+  }
+
   init() {
     this.setupPeriodSelector();
     this.setupCalendarNavigation();
     this.setupAccessibilityAdaptations();
     this.setupNavigation();
     this.loadSavedData();
-
-    // Renderizar calendario inicial
-    this.renderCalendar();
+    this.renderCalendar(); // Renderiza el calendario inicial (deshabilitado)
   }
 
   setupPeriodSelector() {
-    const periodSelect = document.getElementById("examPeriod");
+    // Obtener periodos activos filtrados por fecha
     const activePeriods = ExamData.periodos.filter((periodo) => {
       const endDate = new Date(periodo.fechaFin);
       return endDate >= new Date();
@@ -54,136 +69,159 @@ class ExamFormController {
       const option = document.createElement("option");
       option.value = periodo.id;
       option.textContent = periodo.nombre;
-      periodSelect.appendChild(option);
+      this.periodSelect.appendChild(option);
     });
 
-    // Event listener para cambios de periodo
-    periodSelect.addEventListener("change", () => {
-      const periodo = ExamData.periodos.find(
-        (p) => p.id === periodSelect.value
-      );
-      if (periodo) {
-        this.currentMonth = new Date(periodo.fechaInicio);
+    // Manejar cambio de periodo
+    this.periodSelect.addEventListener("change", () => {
+      const selectedPeriodId = this.periodSelect.value;
+
+      if (selectedPeriodId) {
+        // Activar periodo y actualizar vista
+        this.activePeriod = ExamData.periodos.find(
+          (p) => p.id === selectedPeriodId
+        );
+        this.currentMonth = new Date(this.activePeriod.fechaInicio);
+        this.selectedDate = null; // Resetear selección anterior
+        this.selectedTimeSlot = null;
+        this.renderCalendar();
+        this.resetDateSelection();
+      } else {
+        // Desactivar selección de fechas
+        this.activePeriod = null;
         this.renderCalendar();
       }
     });
+  }
+
+  resetDateSelection() {
+    // Limpiar información de fecha seleccionada
+    this.selectedDateInfo.textContent = "Seleccione una fecha disponible";
+    this.timeSlotsContainer.innerHTML = "";
+    this.examDetails.classList.add("hidden");
   }
 
   setupCalendarNavigation() {
     const prevBtn = document.querySelector(".prev-month");
     const nextBtn = document.querySelector(".next-month");
 
-    prevBtn.addEventListener("click", () => {
-      this.currentMonth = DateUtils.addMonths(this.currentMonth, -1);
-      this.renderCalendar();
+    prevBtn?.addEventListener("click", () => {
+      if (this.activePeriod) {
+        // Solo permitir navegación con periodo activo
+        this.currentMonth = DateUtils.addMonths(this.currentMonth, -1);
+        this.renderCalendar();
+      }
     });
 
-    nextBtn.addEventListener("click", () => {
-      this.currentMonth = DateUtils.addMonths(this.currentMonth, 1);
-      this.renderCalendar();
+    nextBtn?.addEventListener("click", () => {
+      if (this.activePeriod) {
+        // Solo permitir navegación con periodo activo
+        this.currentMonth = DateUtils.addMonths(this.currentMonth, 1);
+        this.renderCalendar();
+      }
     });
   }
 
   renderCalendar() {
     // Actualizar título del mes
-    this.currentMonthElement.textContent = `${
-      DateUtils.MONTHS[this.currentMonth.getMonth()]
-    } ${this.currentMonth.getFullYear()}`;
-
-    // Obtener días del mes
     const year = this.currentMonth.getFullYear();
     const month = this.currentMonth.getMonth();
-    const firstDay = DateUtils.getFirstDayOfMonth(year, month);
-    const daysInMonth = DateUtils.getDaysInMonth(year, month);
-    const today = new Date();
+    this.currentMonthElement.textContent = `${DateUtils.MONTHS[month]} ${year}`;
 
-    // Limpiar calendario
+    if (!this.calendarDates) return;
+
+    // Limpiar y renderizar calendario
     this.calendarDates.innerHTML = "";
 
-    // Agregar días del mes anterior
-    for (let i = 0; i < firstDay; i++) {
-      const prevMonthDays = DateUtils.getDaysInMonth(year, month - 1);
-      this.createDateElement(
-        prevMonthDays - firstDay + i + 1,
-        new Date(year, month - 1, prevMonthDays - firstDay + i + 1),
-        "other-month"
-      );
+    // Calcular días a mostrar
+    const firstDay = DateUtils.getFirstDayOfMonth(year, month);
+    const daysInMonth = DateUtils.getDaysInMonth(year, month);
+    const totalDays = firstDay + daysInMonth + (42 - (firstDay + daysInMonth));
+
+    // Configurar fecha inicial
+    let currentDate = new Date(year, month, 1);
+    currentDate.setDate(currentDate.getDate() - firstDay);
+
+    // Renderizar días
+    for (let i = 0; i < totalDays; i++) {
+      const isOtherMonth = currentDate.getMonth() !== month;
+      const dateElement = this.createDateElement(currentDate, isOtherMonth);
+      this.calendarDates.appendChild(dateElement);
+      currentDate.setDate(currentDate.getDate() + 1);
     }
 
-    // Agregar días del mes actual
-    for (let i = 1; i <= daysInMonth; i++) {
-      const date = new Date(year, month, i);
-      let classes = [];
-
-      if (DateUtils.isToday(date)) classes.push("today");
-      if (ExamData.isFechaDisponible(date)) {
-        classes.push("available");
-        const horarios = ExamData.getHorariosDisponibles(date);
-        if (horarios.length > 0) {
-          classes.push("has-spots");
-          if (horarios.some((h) => h.disponibles < 5)) {
-            classes.push("few-spots");
-          }
-        }
-      }
-
-      this.createDateElement(i, date, classes.join(" "));
-    }
-
-    // Agregar días del mes siguiente
-    const totalDays = firstDay + daysInMonth;
-    const remainingDays = 42 - totalDays; // 6 semanas * 7 días
-    for (let i = 1; i <= remainingDays; i++) {
-      this.createDateElement(i, new Date(year, month + 1, i), "other-month");
-    }
-
-    // Actualizar estado de botones de navegación
     this.updateNavigationButtons();
   }
 
-  createDateElement(day, date, classes = "") {
-    const div = document.createElement("div");
-    div.className = `calendar-date ${classes}`;
-    div.textContent = day;
+  createDateElement(date, isOtherMonth) {
+    const dateElement = document.createElement("div");
+    dateElement.className = `calendar-date${
+      isOtherMonth ? " other-month" : ""
+    }`;
+    dateElement.textContent = date.getDate();
 
-    if (ExamData.isFechaDisponible(date)) {
-      const horarios = ExamData.getHorariosDisponibles(date);
-      if (horarios.length > 0) {
-        const spots = horarios.reduce((total, h) => total + h.disponibles, 0);
-        div.setAttribute("data-tooltip", `${spots} cupos disponibles`);
+    // Solo habilitar selección si hay periodo activo y la fecha está dentro del rango
+    if (this.activePeriod && !isOtherMonth) {
+      const fechaActual = new Date(date);
+      const fechaInicio = new Date(this.activePeriod.fechaInicio);
+      const fechaFin = new Date(this.activePeriod.fechaFin);
 
-        div.addEventListener("click", () => this.handleDateSelection(date));
+      if (
+        fechaActual >= fechaInicio &&
+        fechaActual <= fechaFin &&
+        ExamData.isFechaDisponible(date)
+      ) {
+        const horarios = ExamData.getHorariosDisponibles(date);
+        if (horarios.length > 0) {
+          dateElement.classList.add("available");
+          dateElement.classList.add("has-spots");
+
+          if (horarios.some((h) => h.disponibles < 5)) {
+            dateElement.classList.add("few-spots");
+          }
+
+          const totalSpots = horarios.reduce(
+            (sum, h) => sum + h.disponibles,
+            0
+          );
+          dateElement.setAttribute(
+            "data-tooltip",
+            `${totalSpots} cupos disponibles`
+          );
+
+          dateElement.addEventListener("click", () => {
+            this.handleDateSelection(new Date(date));
+          });
+        }
       }
     }
 
-    if (DateUtils.isSameDay(date, this.selectedDate)) {
-      div.classList.add("selected");
+    // Marcar día actual y selección
+    if (DateUtils.isToday(date)) {
+      dateElement.classList.add("today");
     }
 
-    this.calendarDates.appendChild(div);
+    if (this.selectedDate && DateUtils.isSameDay(date, this.selectedDate)) {
+      dateElement.classList.add("selected");
+    }
+
+    return dateElement;
   }
 
   updateNavigationButtons() {
     const prevBtn = document.querySelector(".prev-month");
     const nextBtn = document.querySelector(".next-month");
 
-    // Obtener el periodo seleccionado
-    const periodSelect = document.getElementById("examPeriod");
-    const periodo = ExamData.periodos.find((p) => p.id === periodSelect.value);
-
-    if (periodo) {
-      const minDate = new Date(periodo.fechaInicio);
-      const maxDate = new Date(periodo.fechaFin);
+    if (this.activePeriod) {
+      const minDate = new Date(this.activePeriod.fechaInicio);
+      const maxDate = new Date(this.activePeriod.fechaFin);
 
       prevBtn.disabled = this.currentMonth <= minDate;
       nextBtn.disabled = DateUtils.addMonths(this.currentMonth, 1) >= maxDate;
     } else {
-      // Si no hay periodo seleccionado, solo permitir navegación limitada
-      const today = new Date();
-      prevBtn.disabled =
-        this.currentMonth.getMonth() === today.getMonth() &&
-        this.currentMonth.getFullYear() === today.getFullYear();
-      nextBtn.disabled = DateUtils.addMonths(this.currentMonth, 12) <= today;
+      // Si no hay periodo seleccionado, deshabilitar navegación
+      prevBtn.disabled = true;
+      nextBtn.disabled = true;
     }
   }
 
@@ -229,9 +267,9 @@ class ExamFormController {
       }
 
       slot.innerHTML = `
-                <div class="time-slot-time">${horario.inicio} - ${horario.fin}</div>
-                <div class="spots-left">${horario.disponibles} cupos disponibles</div>
-            `;
+        <div class="time-slot-time">${horario.inicio} - ${horario.fin}</div>
+        <div class="spots-left">${horario.disponibles} cupos disponibles</div>
+      `;
 
       if (horario.disponibles === 0) {
         slot.classList.add("disabled");
@@ -275,13 +313,11 @@ class ExamFormController {
       this.selectedDate,
       horario.id
     );
-
     this.examLocation.textContent = `${ubicacion.nombre}, ${ubicacion.aula}`;
     this.examDetails.classList.remove("hidden");
   }
 
   setupAccessibilityAdaptations() {
-    // Cargar adaptaciones guardadas
     const savedAccessibility = localStorage.getItem(
       "admissionForm_accessibility"
     );
@@ -309,7 +345,6 @@ class ExamFormController {
 
     adaptationsList.innerHTML = "";
 
-    // Generar lista de adaptaciones basada en las respuestas
     Object.entries(responses).forEach(([category, response]) => {
       if (["no_puedo", "mucha"].includes(response.value)) {
         const adaptations = this.getAdaptationsForCategory(
@@ -390,7 +425,6 @@ class ExamFormController {
       errors.push("Por favor, seleccione un horario para la prueba");
     }
 
-    // Verificar confirmación de adaptaciones si son necesarias
     const confirmAdaptations = document.querySelector(
       'input[name="confirmAdaptations"]'
     );
@@ -415,11 +449,9 @@ class ExamFormController {
     const errorContainer = document.createElement("div");
     errorContainer.className = "validation-errors";
     errorContainer.innerHTML = `
-            <div class="error-title">Por favor corrija los siguientes errores:</div>
-            <ul>
-                ${errors.map((error) => `<li>${error}</li>`).join("")}
-            </ul>
-        `;
+      <div class="error-title">Por favor corrija los siguientes errores:</div>
+      <ul>${errors.map((error) => `<li>${error}</li>`).join("")}</ul>
+    `;
 
     const navigation = this.form.querySelector(".navigation");
     this.form.insertBefore(errorContainer, navigation);
@@ -446,43 +478,56 @@ class ExamFormController {
       console.error("Error al guardar:", error);
       this.showErrors([error.message]);
 
-      // Actualizar la vista de horarios disponibles
+      // Actualizar la vista de horarios disponibles para reflejar cambios
       this.renderTimeSlots(this.selectedDate);
     }
   }
 
   async saveData() {
+    // Preparar los datos para guardar
     const formData = this.formHandler.getFormData();
+
+    // Convertir la fecha seleccionada a formato ISO para almacenamiento
     formData.selectedDate = this.selectedDate
       ? DateUtils.formatDate(this.selectedDate, "iso")
       : null;
+
+    // Guardar el horario seleccionado
     formData.selectedTimeSlot = this.selectedTimeSlot;
 
+    // Almacenar en localStorage para persistencia
     localStorage.setItem("admissionForm_exam", JSON.stringify(formData));
   }
 
   loadSavedData() {
+    // Intentar cargar datos guardados previamente
     const savedData = localStorage.getItem("admissionForm_exam");
     if (!savedData) return;
 
     try {
       const data = JSON.parse(savedData);
 
+      // Si hay una fecha seleccionada previamente, restaurarla
       if (data.selectedDate) {
+        // Convertir la fecha ISO guardada a objeto Date
         this.selectedDate = new Date(data.selectedDate);
+        // Establecer el mes actual al de la fecha guardada
         this.currentMonth = new Date(data.selectedDate);
+        // Restaurar el horario seleccionado
         this.selectedTimeSlot = data.selectedTimeSlot;
 
+        // Actualizar la interfaz con los datos cargados
         this.renderCalendar();
         this.handleDateSelection(this.selectedDate);
       }
     } catch (error) {
       console.error("Error al cargar datos guardados:", error);
+      // Si hay error al cargar, continuar con estado limpio
     }
   }
 }
 
-// Inicializar cuando el DOM esté listo
+// Inicializar el controlador cuando el DOM esté completamente cargado
 document.addEventListener("DOMContentLoaded", () => {
   new ExamFormController();
 });
