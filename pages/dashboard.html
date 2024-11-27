@@ -67,18 +67,310 @@
             </div>
           </section>
 
-          <!-- Editar Información -->
+          <!-- Sección de Edición -->
           <section class="edit-section">
             <h2 class="section-title">
+              <span class="section-icon">✎</span>
               Editar Información
-              <span class="info-icon" data-tooltip="Actualiza tu información"
-                >i</span
-              >
             </h2>
-            <div class="edit-list">
-              <!-- Estado Items -->
+
+            <div class="edit-sections">
+              <!-- Información Personal -->
+              <div class="section-item" data-section="personal">
+                <div class="section-header">
+                  <div class="section-title">
+                    <span class="status-icon">✓</span>
+                    <span>Información Personal</span>
+                  </div>
+                  <div class="section-controls">
+                    <span class="status-text">Completo</span>
+                    <button
+                      class="btn-edit"
+                      aria-label="Editar información personal"
+                    >
+                      <span class="edit-icon">✎</span>
+                    </button>
+                    <button
+                      class="btn-toggle"
+                      aria-label="Mostrar/ocultar detalles"
+                    >
+                      <span class="toggle-icon">▼</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="section-content">
+                  <div class="info-grid">
+                    <div class="info-item">
+                      <span class="info-label">Nombre:</span>
+                      <span class="info-value">Juan Pérez</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="info-label">Cédula:</span>
+                      <span class="info-value">001-0000000-0</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="info-label">Fecha de Nacimiento:</span>
+                      <span class="info-value">01/01/1990</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="info-label">Estado Civil:</span>
+                      <span class="info-value">Soltero</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="info-label">Sexo:</span>
+                      <span class="info-value">Masculino</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Documentos -->
+              <div class="section-item" data-section="documents">
+                <div class="section-header">
+                  <div class="section-title">
+                    <span class="status-icon warning">!</span>
+                    <span>Documentos</span>
+                  </div>
+                  <div class="section-controls">
+                    <span class="status-text">4 de 5 documentos</span>
+                    <button class="btn-edit" aria-label="Gestionar documentos">
+                      <span class="edit-icon">✎</span>
+                    </button>
+                    <button
+                      class="btn-toggle"
+                      aria-label="Mostrar/ocultar detalles"
+                    >
+                      <span class="toggle-icon">▼</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="section-content">
+                  <div class="documents-list">
+                    <div class="document-item verified">
+                      <span class="doc-icon">✓</span>
+                      <span class="doc-name">Documento de Identidad</span>
+                      <span class="doc-status">Verificado</span>
+                      <button class="btn-view" aria-label="Ver documento">
+                        👁
+                      </button>
+                    </div>
+                    <div class="document-item verified">
+                      <span class="doc-icon">✓</span>
+                      <span class="doc-name">Record de Notas</span>
+                      <span class="doc-status">Verificado</span>
+                      <button class="btn-view" aria-label="Ver documento">
+                        👁
+                      </button>
+                    </div>
+                    <div class="document-item verified">
+                      <span class="doc-icon">✓</span>
+                      <span class="doc-name">Foto 2x2</span>
+                      <span class="doc-status">Verificado</span>
+                      <button class="btn-view" aria-label="Ver documento">
+                        👁
+                      </button>
+                    </div>
+                    <div class="document-item verified">
+                      <span class="doc-icon">✓</span>
+                      <span class="doc-name">Acta de Nacimiento</span>
+                      <span class="doc-status">Verificado</span>
+                      <button class="btn-view" aria-label="Ver documento">
+                        👁
+                      </button>
+                    </div>
+                    <div class="document-item pending">
+                      <span class="doc-icon">!</span>
+                      <span class="doc-name">Certificado Médico</span>
+                      <span class="doc-status">Pendiente</span>
+                      <button class="btn-upload" aria-label="Subir documento">
+                        📤
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Información Académica -->
+              <div class="section-item" data-section="academic">
+                <div class="section-header">
+                  <div class="section-title">
+                    <span class="status-icon">✓</span>
+                    <span>Información Académica</span>
+                  </div>
+                  <div class="section-controls">
+                    <span class="status-text">Completo</span>
+                    <button
+                      class="btn-edit"
+                      aria-label="Editar información académica"
+                    >
+                      <span class="edit-icon">✎</span>
+                    </button>
+                    <button
+                      class="btn-toggle"
+                      aria-label="Mostrar/ocultar detalles"
+                    >
+                      <span class="toggle-icon">▼</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="section-content">
+                  <div class="info-grid">
+                    <div class="info-item">
+                      <span class="info-label">Carrera:</span>
+                      <span class="info-value">Ingeniería de Software</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="info-label">Modalidad:</span>
+                      <span class="info-value">Presencial</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="info-label">Horario:</span>
+                      <span class="info-value">Vespertino</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="info-label">Campus:</span>
+                      <span class="info-value">Principal</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Accesibilidad -->
+              <div class="section-item" data-section="accessibility">
+                <div class="section-header">
+                  <div class="section-title">
+                    <span class="status-icon">✓</span>
+                    <span>Accesibilidad</span>
+                  </div>
+                  <div class="section-controls">
+                    <span class="status-text">Completo</span>
+                    <button
+                      class="btn-edit"
+                      aria-label="Editar información de accesibilidad"
+                    >
+                      <span class="edit-icon">✎</span>
+                    </button>
+                    <button
+                      class="btn-toggle"
+                      aria-label="Mostrar/ocultar detalles"
+                    >
+                      <span class="toggle-icon">▼</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="section-content">
+                  <div class="info-grid">
+                    <div class="info-item">
+                      <span class="info-label">Adaptaciones Requeridas:</span>
+                      <span class="info-value">Ninguna</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Prueba de Admisión -->
+              <div class="section-item" data-section="exam">
+                <div class="section-header">
+                  <div class="section-title">
+                    <span class="status-icon">📅</span>
+                    <span>Prueba de Admisión</span>
+                  </div>
+                  <div class="section-controls">
+                    <span class="status-text">Programado</span>
+                    <button
+                      class="btn-edit"
+                      aria-label="Gestionar prueba de admisión"
+                    >
+                      <span class="edit-icon">✎</span>
+                    </button>
+                    <button
+                      class="btn-toggle"
+                      aria-label="Mostrar/ocultar detalles"
+                    >
+                      <span class="toggle-icon">▼</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="section-content">
+                  <div class="info-grid">
+                    <div class="info-item">
+                      <span class="info-label">Fecha:</span>
+                      <span class="info-value">15/03/2024</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="info-label">Hora:</span>
+                      <span class="info-value">9:00 AM</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="info-label">Lugar:</span>
+                      <span class="info-value"
+                        >Campus Principal - Aula 101</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Pago -->
+              <div class="section-item" data-section="payment">
+                <div class="section-header">
+                  <div class="section-title">
+                    <span class="status-icon">✓</span>
+                    <span>Pago</span>
+                  </div>
+                  <div class="section-controls">
+                    <span class="status-text">Completado</span>
+                    <button class="btn-edit" aria-label="Ver detalles de pago">
+                      <span class="edit-icon">✎</span>
+                    </button>
+                    <button
+                      class="btn-toggle"
+                      aria-label="Mostrar/ocultar detalles"
+                    >
+                      <span class="toggle-icon">▼</span>
+                    </button>
+                  </div>
+                </div>
+                <div class="section-content">
+                  <div class="info-grid">
+                    <div class="info-item">
+                      <span class="info-label">Método:</span>
+                      <span class="info-value">Tarjeta de Crédito</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="info-label">Fecha:</span>
+                      <span class="info-value">01/03/2024</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="info-label">Monto:</span>
+                      <span class="info-value">RD$ 4,100.00</span>
+                    </div>
+                    <div class="info-item">
+                      <span class="info-label">Estado:</span>
+                      <span class="info-value">Aprobado</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </section>
+
+          <!-- Modal de Edición -->
+          <div id="editModal" class="modal">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h3 class="modal-title">Editar Información</h3>
+                <button class="modal-close" aria-label="Cerrar">×</button>
+              </div>
+              <div class="modal-body">
+                <!-- El contenido del formulario se cargará dinámicamente -->
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-secondary modal-cancel">Cancelar</button>
+                <button class="btn btn-primary modal-save">Guardar</button>
+              </div>
+            </div>
+          </div>
         </main>
 
         <aside class="side-section">

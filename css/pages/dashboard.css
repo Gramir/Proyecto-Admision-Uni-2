@@ -165,3 +165,363 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Contenedor principal de secciones */
+.edit-section {
+  background: white;
+  border-radius: var(--border-radius);
+  padding: var(--spacing-lg);
+  margin-top: var(--spacing-lg);
+}
+
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: 1.2rem;
+  margin-bottom: var(--spacing-lg);
+}
+
+.section-icon {
+  font-size: 1.4rem;
+  color: var(--primary-color);
+}
+
+/* Estilos de las secciones individuales */
+.section-item {
+  background: white;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-md);
+  overflow: hidden;
+  transition: box-shadow var(--transition-speed) ease;
+}
+
+.section-item:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Encabezado de sección */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md);
+  background: var(--secondary-color);
+  cursor: pointer;
+  user-select: none;
+}
+
+.section-header .section-title {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.section-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+/* Estados e íconos */
+.status-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--success-color);
+  color: white;
+  font-size: 0.9rem;
+}
+
+.status-icon.warning {
+  background: #f59e0b;
+}
+
+.status-text {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Botones de control */
+.btn-edit,
+.btn-toggle {
+  background: none;
+  border: none;
+  padding: var(--spacing-xs);
+  cursor: pointer;
+  color: #666;
+  transition: color var(--transition-speed) ease;
+}
+
+.btn-edit:hover,
+.btn-toggle:hover {
+  color: var(--primary-color);
+}
+
+.toggle-icon {
+  display: inline-block;
+  transition: transform var(--transition-speed) ease;
+}
+
+.section-item.expanded .toggle-icon {
+  transform: rotate(180deg);
+}
+
+/* Contenido de la sección */
+.section-content {
+  padding: var(--spacing-md);
+  display: none;
+  border-top: 1px solid var(--border-color);
+}
+
+.section-item.expanded .section-content {
+  display: block;
+  animation: slideDown 0.3s ease-out;
+}
+
+/* Grid de información */
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.info-label {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.info-value {
+  font-weight: 500;
+  color: var(--text-color);
+}
+
+/* Lista de documentos */
+.documents-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.document-item {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-sm);
+  background: #f8f9fa;
+  border-radius: var(--border-radius);
+  gap: var(--spacing-sm);
+}
+
+.document-item.verified {
+  background: #f0fdf4;
+}
+
+.document-item.pending {
+  background: #fff7ed;
+}
+
+.doc-icon {
+  width: 24px;
+  height: 24px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 0.9rem;
+}
+
+.document-item.verified .doc-icon {
+  background: var(--success-color);
+  color: white;
+}
+
+.document-item.pending .doc-icon {
+  background: #f59e0b;
+  color: white;
+}
+
+.doc-name {
+  flex: 1;
+}
+
+.doc-status {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* Botones de documento */
+.btn-view,
+.btn-upload {
+  background: none;
+  border: none;
+  padding: var(--spacing-xs);
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: transform var(--transition-speed) ease;
+}
+
+.btn-view:hover,
+.btn-upload:hover {
+  transform: scale(1.1);
+}
+
+/* Modal de edición */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-speed) ease;
+}
+
+.modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-content {
+  background: white;
+  border-radius: var(--border-radius);
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+  transform: translateY(-20px);
+  transition: transform var(--transition-speed) ease;
+}
+
+.modal.active .modal-content {
+  transform: translateY(0);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-md);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.modal-title {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+  transition: color var(--transition-speed) ease;
+}
+
+.modal-close:hover {
+  color: var(--error-color);
+}
+
+.modal-body {
+  padding: var(--spacing-md);
+}
+
+.modal-footer {
+  padding: var(--spacing-md);
+  border-top: 1px solid var(--border-color);
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-sm);
+}
+
+/* Animaciones */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .section-header {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+    text-align: center;
+  }
+
+  .section-controls {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .modal-content {
+    width: 95%;
+  }
+}
+
+/* Animaciones para expandir/contraer */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+/* Asegurar que el contenido está oculto por defecto */
+.section-content {
+  display: none;
+}
+
+/* Estilos para la flecha */
+.toggle-icon {
+  transition: transform var(--transition-speed) ease;
+}
+
+/* Agregar hover a los headers */
+.section-header:hover {
+  background-color: var(--secondary-color);
+  cursor: pointer;
+}
+
+/* Prevenir hover en controles */
+.section-controls {
+  z-index: 1;
+}
