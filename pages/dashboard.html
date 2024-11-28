@@ -10,6 +10,11 @@
   </head>
   <body>
     <div class="container">
+      <img
+        src="/asserts/img/Logo-unicda-2048x431.webp"
+        alt="Logo UNICDA"
+        class="institutional-logo"
+      />
       <h1 class="dashboard-title">DASHBOARD DE SEGUIMIENTO</h1>
 
       <div class="dashboard-grid">
@@ -359,15 +364,17 @@
           <div id="editModal" class="modal">
             <div class="modal-content">
               <div class="modal-header">
-                <h3 class="modal-title">Editar Información</h3>
+                <h3 class="modal-title">Editar Documentos</h3>
                 <button class="modal-close" aria-label="Cerrar">×</button>
               </div>
               <div class="modal-body">
-                <!-- El contenido del formulario se cargará dinámicamente -->
+                <div class="document-list">
+                  <!-- Los items de documentos se generarán dinámicamente -->
+                </div>
               </div>
               <div class="modal-footer">
-                <button class="btn btn-secondary modal-cancel">Cancelar</button>
-                <button class="btn btn-primary modal-save">Guardar</button>
+                <button class="btn modal-cancel">Cancelar</button>
+                <button class="btn modal-save">Guardar Cambios</button>
               </div>
             </div>
           </div>

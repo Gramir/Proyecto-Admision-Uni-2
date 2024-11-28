@@ -442,6 +442,206 @@ document.addEventListener("DOMContentLoaded", function () {
 
     progressFill.style.width = `${progressPercentage}%`;
   }
+  // Clase para manejar el editor de documentos
+  class DocumentEditor {
+    constructor() {
+      this.documents = [
+        {
+          id: "identity",
+          name: "Documento de Identidad",
+          status: "verified",
+          fileName: "cedula.pdf",
+          type: "application/pdf",
+        },
+        {
+          id: "grades",
+          name: "Record de Notas",
+          status: "verified",
+          fileName: "notas.pdf",
+          type: "application/pdf",
+        },
+        {
+          id: "photo",
+          name: "Foto 2x2",
+          status: "verified",
+          fileName: "foto.jpg",
+          type: "image/jpeg",
+        },
+        {
+          id: "medical",
+          name: "Certificado Médico",
+          status: "pending",
+          fileName: null,
+          type: null,
+        },
+      ];
+
+      this.documentList = document.querySelector(".document-list");
+      this.init();
+    }
+
+    init() {
+      this.renderDocuments();
+      this.setupEventListeners();
+    }
+
+    renderDocuments() {
+      if (!this.documentList) return;
+
+      this.documentList.innerHTML = this.documents
+        .map(
+          (doc) => `
+          <div class="document-item" data-id="${doc.id}">
+              <div class="document-status ${doc.status}">
+                  ${doc.status === "verified" ? "✓" : "!"}
+              </div>
+              <div class="document-info">
+                  <div class="document-name">${doc.name}</div>
+                  ${
+                    doc.fileName
+                      ? `<div class="document-filename">${doc.fileName}</div>`
+                      : ""
+                  }
+                  <div class="upload-progress">
+                      <div class="progress-bar"></div>
+                  </div>
+                  <div class="upload-error"></div>
+              </div>
+              <div class="document-actions">
+                  ${
+                    doc.fileName
+                      ? `<button class="btn-delete" aria-label="Eliminar documento">×</button>`
+                      : `<button class="btn-upload">
+                          <span>📤</span>
+                          <span>Subir</span>
+                      </button>`
+                  }
+              </div>
+              <input type="file" class="file-input" accept=".pdf,.jpg,.jpeg,.png">
+          </div>
+      `
+        )
+        .join("");
+    }
+
+    setupEventListeners() {
+      if (!this.documentList) return;
+
+      // Delegación de eventos para los botones
+      this.documentList.addEventListener("click", (e) => {
+        const documentItem = e.target.closest(".document-item");
+        if (!documentItem) return;
+
+        const docId = documentItem.dataset.id;
+
+        if (e.target.classList.contains("btn-upload")) {
+          const fileInput = documentItem.querySelector(".file-input");
+          fileInput.click();
+        }
+
+        if (e.target.classList.contains("btn-delete")) {
+          this.handleDelete(docId);
+        }
+      });
+
+      // Manejar cambios en los inputs de archivo
+      this.documentList.addEventListener("change", (e) => {
+        if (!e.target.classList.contains("file-input")) return;
+
+        const documentItem = e.target.closest(".document-item");
+        const docId = documentItem.dataset.id;
+        const file = e.target.files[0];
+
+        if (file) {
+          this.handleFileUpload(docId, file, documentItem);
+        }
+      });
+    }
+
+    handleFileUpload(docId, file, documentItem) {
+      // Simular progreso de carga
+      const progressBar = documentItem.querySelector(".progress-bar");
+      const progressContainer = documentItem.querySelector(".upload-progress");
+      progressContainer.classList.add("active");
+
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += 10;
+        progressBar.style.width = `${progress}%`;
+
+        if (progress >= 100) {
+          clearInterval(interval);
+          setTimeout(() => {
+            this.updateDocument(docId, {
+              fileName: file.name,
+              type: file.type,
+              status: "pending",
+            });
+            progressContainer.classList.remove("active");
+            this.renderDocuments();
+          }, 500);
+        }
+      }, 200);
+    }
+
+    handleDelete(docId) {
+      this.updateDocument(docId, {
+        fileName: null,
+        type: null,
+        status: "pending",
+      });
+      this.renderDocuments();
+    }
+
+    updateDocument(docId, updates) {
+      this.documents = this.documents.map((doc) =>
+        doc.id === docId ? { ...doc, ...updates } : doc
+      );
+    }
+
+    getDocuments() {
+      return this.documents;
+    }
+  }
+
+  // Extender el controlador del dashboard
+  function handleEdit(sectionId) {
+    const modal = document.getElementById("editModal");
+    if (!modal) return;
+
+    const modalTitle = modal.querySelector(".modal-title");
+    const modalBody = modal.querySelector(".modal-body");
+
+    if (sectionId === "documents") {
+      modalTitle.textContent = "Editar Documentos";
+
+      // Inicializar el editor de documentos
+      const documentEditor = new DocumentEditor();
+    }
+
+    modal.classList.add("active");
+
+    // Configurar botones del modal
+    const closeBtn = modal.querySelector(".modal-close");
+    const cancelBtn = modal.querySelector(".modal-cancel");
+    const saveBtn = modal.querySelector(".modal-save");
+
+    const closeModal = () => {
+      modal.classList.remove("active");
+    };
+
+    closeBtn?.addEventListener("click", closeModal);
+    cancelBtn?.addEventListener("click", closeModal);
+
+    saveBtn?.addEventListener("click", () => {
+      // Aquí iría la lógica para guardar los cambios
+      closeModal();
+    });
+
+    modal.addEventListener("click", (e) => {
+      if (e.target === modal) closeModal();
+    });
+  }
 
   // Inicializar dashboard
   function initializeDashboard() {

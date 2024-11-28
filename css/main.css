@@ -1,15 +1,28 @@
 /* Variables globales */
 :root {
-  --primary-color: #000000;
+  /* Colores institucionales */
+  --primary-red: #cc1b1b;
+  --primary-blue: #004a98;
+  --primary-white: #ffffff;
+  --light-red: #ff4d4d;
+  --light-blue: #3377cc;
+
+  /* Colores del sistema existentes */
+  --primary-color: var(--primary-blue);
   --secondary-color: #f5f5f7;
   --text-color: #1a1a1a;
   --border-color: #ddd;
   --success-color: #43a047;
   --error-color: #dc2626;
+
+  /* Espaciados */
   --spacing-xs: 0.5rem;
   --spacing-sm: 1rem;
   --spacing-md: 1.5rem;
   --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+
+  /* Otros */
   --border-radius: 4px;
   --transition-speed: 0.3s;
 }
@@ -40,16 +53,58 @@ body {
   display: flex;
   flex-direction: column;
   padding: 0 var(--spacing-sm);
+  background-color: var(--primary-white);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+}
+
+/* Logo institucional */
+.institutional-logo {
+  position: absolute;
+  top: var(--spacing-lg);
+  left: 50%;
+  transform: translateX(-50%);
+  width: 200px;
+  height: auto;
+  z-index: 10;
+}
+
+/* Progress Bar Container con espacio para logo */
+.progress-container {
+  margin-top: 80px; /* Espacio para el logo */
+  padding: var(--spacing-lg);
+  background-color: var(--primary-white);
+  border-radius: var(--border-radius);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.progress-bar-container {
+  margin-bottom: var(--spacing-md);
+}
+
+.progress-bar {
+  height: 8px;
+  background: var(--secondary-color);
+  border-radius: var(--border-radius);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(45deg, var(--primary-blue), var(--primary-red));
+  border-radius: var(--border-radius);
+  transition: width var(--transition-speed) ease;
 }
 
 /* Header común */
 .header {
   padding: var(--spacing-sm) 0;
-  border-bottom: 1px dashed var(--primary-color);
+  border-bottom: 2px solid var(--primary-red);
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
+  background-color: var(--primary-white);
 }
 
 .header__logo-img {
@@ -67,8 +122,9 @@ body {
 .footer {
   padding: var(--spacing-sm) 0;
   text-align: center;
-  border-top: 1px dashed var(--primary-color);
+  border-top: 2px solid var(--primary-red);
   width: 100%;
+  background-color: var(--primary-white);
 }
 
 .footer__nav {
@@ -79,14 +135,106 @@ body {
 
 .footer__link {
   text-decoration: none;
-  color: var(--text-color);
+  color: var(--primary-blue);
+  transition: color var(--transition-speed) ease;
+}
+
+.footer__link:hover {
+  color: var(--light-blue);
 }
 
 .footer__separator {
   color: var(--border-color);
 }
 
-/* Utilidades comunes */
+/* Botones */
+.btn {
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  transition: all var(--transition-speed) ease;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.btn-primary {
+  background-color: var(--primary-blue);
+  color: var(--primary-white);
+  border-color: var(--primary-blue);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background-color: var(--light-blue);
+  border-color: var(--light-blue);
+}
+
+.btn-secondary {
+  background-color: var(--primary-red);
+  color: var(--primary-white);
+  border-color: var(--primary-red);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background-color: var(--light-red);
+  border-color: var(--light-red);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Formularios */
+.form-control {
+  width: 100%;
+  padding: var(--spacing-sm);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: border-color var(--transition-speed) ease,
+    box-shadow var(--transition-speed) ease;
+  background-color: var(--primary-white);
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 2px rgba(0, 74, 152, 0.1);
+}
+
+.form-control.error {
+  border-color: var(--error-color);
+}
+
+/* Títulos */
+.form-title {
+  font-size: 1.75rem;
+  color: var(--primary-blue);
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-sm);
+  border-bottom: 2px solid var(--primary-red);
+}
+
+/* Mensajes de estado */
+.alert {
+  padding: var(--spacing-sm);
+  border-radius: var(--border-radius);
+  margin-bottom: var(--spacing-sm);
+}
+
+.alert-success {
+  background-color: #e8f5e9;
+  color: var(--success-color);
+  border: 1px solid #c8e6c9;
+}
+
+.alert-error {
+  background-color: #ffebee;
+  color: var(--error-color);
+  border: 1px solid #ffcdd2;
+}
+
+/* Utilidades */
 .hidden {
   display: none !important;
 }
@@ -100,5 +248,25 @@ body {
   .header {
     flex-direction: column;
     gap: var(--spacing-sm);
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .institutional-logo {
+    width: 150px;
+    top: var(--spacing-sm);
+  }
+
+  .progress-container {
+    margin-top: 60px;
+  }
+}
+
+/* Soporte para movimiento reducido */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
   }
 }
