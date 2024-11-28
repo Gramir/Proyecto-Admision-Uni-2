@@ -71,7 +71,7 @@ body {
 
 /* Progress Bar Container con espacio para logo */
 .progress-container {
-  margin-top: 80px; /* Espacio para el logo */
+  margin-top: 80px;
   padding: var(--spacing-lg);
   background-color: var(--primary-white);
   border-radius: var(--border-radius);
@@ -94,6 +94,42 @@ body {
   background: linear-gradient(45deg, var(--primary-blue), var(--primary-red));
   border-radius: var(--border-radius);
   transition: width var(--transition-speed) ease;
+}
+
+.progress-steps {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--spacing-sm);
+}
+
+.step {
+  flex: 1;
+  text-align: center;
+  position: relative;
+}
+
+.step-number {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--primary-white);
+  border: 1px solid var(--border-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto var(--spacing-xs);
+}
+
+.step.completed .step-number {
+  background: var(--success-color);
+  color: var(--primary-white);
+  border-color: var(--success-color);
+}
+
+.step.active .step-number {
+  background: var(--primary-blue);
+  color: var(--primary-white);
+  border-color: var(--primary-blue);
 }
 
 /* Header común */
@@ -125,6 +161,7 @@ body {
   border-top: 2px solid var(--primary-red);
   width: 100%;
   background-color: var(--primary-white);
+  margin-top: auto;
 }
 
 .footer__nav {
@@ -240,33 +277,125 @@ body {
 }
 
 /* Media queries */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .container {
-    padding: 0 var(--spacing-xs);
+    max-width: 95%;
   }
 
-  .header {
-    flex-direction: column;
-    gap: var(--spacing-sm);
+  .form-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-md);
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: var(--spacing-xs);
+    margin: 0;
+    width: 100%;
+  }
+
+  .institutional-logo {
+    width: 120px;
+    top: var(--spacing-xs);
+  }
+
+  .progress-container {
+    margin-top: 50px;
+    padding: var(--spacing-sm);
+  }
+
+  .progress-steps {
+    overflow-x: auto;
+    padding-bottom: var(--spacing-xs);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .step {
+    min-width: 80px;
+  }
+
+  .step-label {
+    font-size: 0.75rem;
   }
 
   .form-grid {
     grid-template-columns: 1fr;
+    gap: var(--spacing-sm);
   }
 
-  .institutional-logo {
-    width: 150px;
-    top: var(--spacing-sm);
+  .form-section {
+    padding: var(--spacing-sm);
   }
 
-  .progress-container {
-    margin-top: 60px;
+  .form-title {
+    font-size: 1.25rem;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .navigation {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .btn {
+    width: 100%;
+    padding: var(--spacing-sm);
+    font-size: 1rem;
+    min-height: 44px;
+  }
+
+  .header,
+  .footer {
+    padding: var(--spacing-sm) var(--spacing-xs);
+  }
+
+  .header__nav {
+    width: 100%;
+    justify-content: center;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 16px !important;
   }
 }
 
-/* Soporte para movimiento reducido */
-@media (prefers-reduced-motion: reduce) {
-  * {
-    transition: none !important;
+@media (max-width: 480px) {
+  .institutional-logo {
+    width: 100px;
+    top: var(--spacing-xs);
+  }
+
+  .progress-container {
+    margin-top: 40px;
+    padding: var(--spacing-xs);
+  }
+
+  .step-number {
+    width: 24px;
+    height: 24px;
+    font-size: 0.75rem;
+  }
+
+  .form-title {
+    font-size: 1.1rem;
+  }
+
+  .form-section {
+    padding: var(--spacing-xs);
+  }
+}
+
+/* Ajustes para orientación landscape */
+@media (orientation: landscape) and (max-width: 900px) {
+  .progress-container {
+    margin-top: 40px;
+  }
+
+  .form-section {
+    max-height: 80vh;
+    overflow-y: auto;
   }
 }
