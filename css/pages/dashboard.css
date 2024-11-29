@@ -702,3 +702,29 @@
 .upload-error.active {
   display: block;
 }
+/* Asegurar que el modal esté por encima de todo */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-speed) ease;
+  z-index: 99999; /* Valor alto de z-index */
+}
+.modal-content {
+  position: relative; /* Para que su contenido esté sobre el fondo */
+  z-index: 10000; /* Mayor que el del modal */
+  background: white;
+  border-radius: var(--border-radius);
+  width: 90%;
+  max-width: 600px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
